@@ -24,6 +24,9 @@ As alternative, you can try to use the linux-subsystem of your Windows installat
 winget install --id=Microsoft.VisualStudioCode -e
 
 (optional)
+winget install -e --id Python.Python.3.12
+
+(optional)
 winget install -e --id Git.Git
 (if you cannot install, download it manually from https://git-scm.com/downloads/win)
 
