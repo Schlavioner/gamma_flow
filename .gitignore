@@ -1,0 +1,14 @@
+/Output/
+/data/
+/Daten/
+/plots/
+/BfS/
+/trained_models/
+/__pycache__/
+/.venv/
+/venv/
+/.vscode/
+/.ipynb_checkpoints/
+.gitlab/
+*.pyc
+ 
