@@ -109,7 +109,8 @@ sudo snap install --classic code
 
 ### Step 0: Preparation 
 
-- Open an IDE that can handle both python files and jupyter notebooks (recommendation: VSCode).
+- Open an IDE that can handle both python files and jupyter notebooks (recommendation: VSCode): 
+Right-click on the project folder, select `open with` and `Visual Studio Code`
 - Install jupyter kernel
 - Select the venv inside the notebook (the symbol is comparable to a document shredder)
 
