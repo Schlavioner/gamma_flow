@@ -24,7 +24,7 @@ As alternative, you can try to use the linux-subsystem of your Windows installat
 winget install --id=Microsoft.VisualStudioCode -e
 
 (optional)
-winget install --id=git.git -e
+winget install -e --id Git.Git
 (if you cannot install, download it manually from https://git-scm.com/downloads/win)
 
 (optional, if you encounter problems with install.bat) 
