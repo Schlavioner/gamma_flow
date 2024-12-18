@@ -102,6 +102,7 @@ sudo snap install --classic code
 > ```bash
 > sudo chmod +x install.sh
 > ./install.sh
+> source .venv/bin/activate
 > ```
 
 ## Usage: Run the minimal example with the provided data
