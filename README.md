@@ -51,10 +51,10 @@ winget install --id=Anaconda.Anaconda3 -e
 
 Simple download the zip-file from the repository page.
 
-### Step 3: Change into folder gamma-software-publication
+### Step 3: Change into folder gamma_flow
 > 
 > ```bash
-> cd gamma-flow
+> cd gamma_flow
 > ```
 
 or go into the folder.
@@ -81,22 +81,15 @@ sudo snap install --classic code
 
 ### Step 2: Clone or download repository
 
-> From gitlab
 > ```bash
-> git clone https://gitlab.ai-env.de/use-case-gammaspektren/gamma-software-publication.git 
-> (Input your gitlab username+password)
-> ```
-
-> From github (future) TODO Benny
-> ```bash
-> git clone https://github.com/UBA-AI-Lab/gamma-software-publication
+> git clone https://gitlab.opencode.de/uba-ki-lab/gamma_flow.git
 > ```
 
 
-### Step 3: Change into folder gamma-software-publication
+### Step 3: Change into folder gamma_flow
 > 
 > ```bash
-> cd gamma-software-publication
+> cd gamma_flow
 > ```
 
 ### Step 4: Execute installation script
