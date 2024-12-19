@@ -44,7 +44,7 @@ winget install --id=Anaconda.Anaconda3 -e
 *Cloning* 
 
 > ```bash
-> git clone https://gitlab.opencode.de/uba-ki-lab/gamma_flow_joss.git
+> git clone https://gitlab.opencode.de/uba-ki-lab/gamma_flow.git
 > ```
 
 *Download* 
@@ -54,7 +54,7 @@ Simple download the zip-file from the repository page.
 ### Step 3: Change into folder gamma-software-publication
 > 
 > ```bash
-> cd gamma-software-publication
+> cd gamma-flow
 > ```
 
 or go into the folder.
