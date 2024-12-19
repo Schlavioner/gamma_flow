@@ -11,7 +11,6 @@ authors:
   - name: Viola Rädle
     orcid: 0000-0002-5852-0266
     corresponding: true
-    equal-contrib: true
     affiliation: 1
   - name: Tilman Hartwig
     orcid: 0000-0001-6742-8843
@@ -53,27 +52,27 @@ strenous, error-prone task that depends upon expert knowledge. Hence, this raise
 the need for algorithms assisting in the initial categorization and recognizability 
 of measured gamma spectra. 
 
-The delineated use case brings along several requirements: 
+The delineated use case brings along several requirements:   
 - As mobile, room temperature detectors are often deployed in nuclear security applications, the produced spectra
 typically exhibit a rather low energy resolution. In addition, a high temporal resolution is 
 required (usually around one spectrum per second), leading to a low acquisition time and a low 
-signal-to-noise ratio. Hence, the model must be robust and be able to handle noisy data. 
+signal-to-noise ratio. Hence, the model must be robust and be able to handle noisy data.  
 - For some radioactive sources, acquisition of training spectra may be challenging. Instead, 
-spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code `[@Kulesza:2022]`. In this process, 
+spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code `[@Kulesza2022]`. In this process, 
 energy deposition in a detector material is simulated, yielding spectra that can be used for 
 model training. However, simulated spectra and measured spectra from real-world sources 
 may differ, which may be a constraint for model performance. On this account, 
 preliminary data exploration is crucial to assess the similarity of spectral data from 
-different detectors and to evaluate potential data limitations.
+different detectors and to evaluate potential data limitations.  
 - At last, not only the correct classification of single-label test spectra (stemming from 
 one isotope) is necessary, but also the decomposition of linear combinations of various 
 isotopes (multi-label spectra). Hence, classification approaches like k-nearest-neighbours 
-that solely depend on the similarity between training and test spectra are not applicable. 
+that solely depend on the similarity between training and test spectra are not applicable.  
 
-This paper presents `gamma_flow`, a python package that includes the 
-- classification of test spectra to predict their constituents 
-- denoising of test spectra for better recognizability
-- outlier detection to evaluate the model's applicability to test spectra
+This paper presents `gamma_flow`, a python package that includes the   
+- classification of test spectra to predict their constituents   
+- denoising of test spectra for better recognizability   
+- outlier detection to evaluate the model's applicability to test spectra   
 
 It is based on a dimensionality reduction model that constitutes a novel, supervised approach 
 to non-negative matrix factorization (NMF). More explicitly, the spectral data matrix is 
@@ -103,9 +102,9 @@ to be an outlier.
 In many research fields, spectral measurements help to assess material properties. 
 In this context, an area of interest for many researchers is the classification (automated 
 labelling) of the measured spectra. Proprietary spectral analysis software, however, are often 
-limited in their functionality and adaptability `[@Lam:2011; @Naseredding:2023]`. 
+limited in their functionality and adaptability `[@Lam2011; @Naseredding2023]`. 
 In addition, the underlying mechanisms are usually not revealed and may act as a black-box 
-system to the user `[@El Amri:2022]`. 
+system to the user `[@El Amri2022]`. 
 On top of that, a spectral comparison is typically only possible for spectra of pure substances `[@Cowger:2021]`. 
 However, there may be a need to decompound multi-label spectra (linear combinations of different substances) 
 and identify their constituents. 
@@ -146,21 +145,21 @@ The notebook `01_preprocessing.ipynb` synchronizes spectral data and provides a 
 of visualizations for data exploration. All functions called in this notebook are found 
 in `tools_preprocessing.py`. 
 
-During preprocessing, the following steps are performed:  
-    - Spectral data files are converted from .xlsm/.spe data to .npy format and saved.
-    - Spectra of different energy calibrations are rebinned to a standard energy calibration.
+During preprocessing, the following steps are performed:   
+    - Spectral data files are converted from .xlsm/.spe data to .npy format and saved.  
+    - Spectra of different energy calibrations are rebinned to a standard energy calibration.  
     - Spectral data are aggregated by label classes and detectors. Thus, it is possible to 
-    collect data from different files and formats.
-    - Optional: The spectra per isotope are limited to a maximum number.
-    - The preprocessed spectra are saved as .npy files.
+    collect data from different files and formats.  
+    - Optional: The spectra per isotope are limited to a maximum number.  
+    - The preprocessed spectra are saved as .npy files.  
 
-Data exploration involves the following visualizations:
+Data exploration involves the following visualizations:  
     - For each label class (e.g. for each isotope), the mean spectra are calculated detector-wise and compared 
-    quantitatively by the cosine similarity.
+    quantitatively by the cosine similarity.  
     - For each label class, example spectra are chosen randomly and plotted to provide an overview
-    over the data.
+    over the data.  
     - The cosine similarity is calculated and visualized as a matrix for all label classes and detectors. 
-    This helps to assess whether the model can handle spectra from different detectors. 
+    This helps to assess whether the model can handle spectra from different detectors.   
 
 
 ## Model training and testing
@@ -170,9 +169,9 @@ this notebook are found in `tools_model.py`.
 
 The dimensionality reduction model presented in this paper comprises a matrix decomposition of
 spectral data. More precisely, the original spectra matrix $X$ is reconstructed by two low-rank 
-matrices $S$ and $L$: 
-$$ X \approx S  L^{T} $$
-with  S: scores matrix (spectra in latent space)
+matrices $S$ and $L$:  
+$$ X \approx S  L^{T} $$  
+with  S: scores matrix (spectra in latent space)  
       L: loadings matrix (transformation matrix or latent components)
 
 
@@ -207,13 +206,13 @@ only one isotope or pure background)
 2. test data from different detector (each spectrum including one isotope and background)
 3. multi-label test data from different detector (each spectrum including multiple isotopes and background)
 
-For all test datasets, spectra are classified and denoised. The results are visualized as
-    - confusion matrix
-    - misclassified spectra
-    - denoised example spectrum
-    - misclassification statistics
-    - scores as scatter matrix
-    - mean scores as bar plot
+For all test datasets, spectra are classified and denoised. The results are visualized as  
+    - confusion matrix  
+    - misclassified spectra  
+    - denoised example spectrum  
+    - misclassification statistics  
+    - scores as scatter matrix  
+    - mean scores as bar plot  
 This helps to assess model performance with respect to classification and denoising. 
 
 ## Outlier analysis
@@ -226,10 +225,10 @@ one specific isotope. The trained model is then inferenced on spectra of this un
 to investigate its behaviour with outliers. 
 First, the resulting latent space distribution and further meta data are analyzed to distinguish 
 known from unknown spectra. Using a decision tree, the most informative feature is identified. 
-Next, a decision boundary is derived for this feature, by 
-a) using the condition of the first split in the decision tree 
-b) fitting a logistic regression (sigmoid function) to the data  
-c) setting a manual threshold by considering accuracy, precision and recall of outlier identification. 
+Next, a decision boundary is derived for this feature, by  
+a) using the condition of the first split in the decision tree   
+b) fitting a logistic regression (sigmoid function) to the data   
+c) setting a manual threshold by considering accuracy, precision and recall of outlier identification.  
 The derived decision boundary can then be implemented in the measurement pipeline by the user.
 
 
