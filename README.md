@@ -1,17 +1,22 @@
 ## Name
-GAMMA_FLOW: **G**uided **A**nalysis of **M**ulti-label spectra by **Ma**trix **f**actorization for **L**ightweight **O**perational **W**orkflows
+GAMMA_FLOW: **G**uided **A**nalysis of **M**ulti-label spectra by **Ma**trix **F**actorization for **L**ightweight **O**perational **W**orkflows
 
 ## Description
 In this project, a model is trained to analyze gamma spectra. It includes the preprocessing of spectra and training of a dimensionality reduction model. As a result, (unlabelled) test spectra can be denoised and classified, including a classification uncertainty and a measure for the outlier probability. The model can be applied to single-label spectra as well as to multi-label spectra (linear combinations of the training spectra).
 
 ## Installation
 
-To execute the jupyter notebooks, it is necessary to have an IDE like Visual Studio Code 
+To execute the jupyter notebooks, it is necessary to have python (ideally >=3.12) and an IDE like Visual Studio Code 
 installed. Additionally, it is recommend to have git available for cloning the repository.
 
 *If this is not possible with your setup, you can simply download the repository as zip-file.*
 
-Our script is generally designed for usage with Ubuntu. 
+GAMMA_FLOW is generally designed for usage with **Ubuntu** (installation script and instructions below). 
+We have successfully tested GAMMA_FLOW on the following operating systems:
+- Ubuntu 22.04.5 LTS
+- MS Windows 11 Pro
+- macOS Catalina 10.15.7
+
 Windows user can try to follow the windows part of installation, if winget is available on their machine.
 As alternative, you can try to use the linux-subsystem of your Windows installation 
 (https://learn.microsoft.com/de-de/windows/wsl/install). Then you can use the linux script.
