@@ -1,4 +1,4 @@
-**Contributing to GAMMA_FLOW**
+#### Contributing to GAMMA_FLOW
 
 All contributions to GAMMA_FLOW are welcome! This document outlines the process and guidelines for contributing to the project.
 
