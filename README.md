@@ -42,15 +42,9 @@ winget install --id=Anaconda.Anaconda3 -e
 ### Step 2: Clone or download repository
 
 *Cloning* 
-> From gitlab
-> ```bash
-> git clone https://gitlab.ai-env.de/use-case-gammaspektren/gamma-software-publication.git 
-> (Input your gitlab username+password)
-> ```
 
-> From github (future) TODO Benny
 > ```bash
-> git clone https://github.com/UBA-AI-Lab/gamma-software-publication
+> git clone https://gitlab.opencode.de/uba-ki-lab/gamma_flow_joss.git
 > ```
 
 *Download* 
