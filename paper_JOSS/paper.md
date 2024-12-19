@@ -17,7 +17,7 @@ authors:
     orcid: 0000-0001-6742-8843
     affiliation: 1
   - name: Benjamin Oesen
-      affiliation: 1
+    affiliation: 1
   - name: Julius Vogt
     orcid: 0009-0005-8667-080X
     affiliation: 2
