@@ -1,0 +1,57 @@
+publiccodeYmlVersion: '0.3'
+name: 'GAMMA_FLOW' TODO groß oder klein shreiben?
+url: 'https://gitlab.opencode.de/uba-ki-lab/gamma_flow' TODO groß oder klein schreiben?
+releaseDate: '2024-12-20'
+softwareVersion: '0.1'
+platforms: 
+  - linux TODO
+categories:
+  - spectral analysis
+  - laboratory software
+  - data-analytics
+  - denoising
+  - classification
+  - outlier detection
+developmentStatus: concept TODO
+softwareType: 'standalone/backend' TODO
+description:
+  de:
+    genericName: 'TODO Gr/Kl? GAMMA_FLOW: **G**uided **A**nalysis of **M**ulti-label spectra by **Ma**trix **f**actorization for **L**ightweight **O**perational **W**orkflows'
+    shortDescription: 'Training und Test eines Modells zur Entrauschung, Klassifizierung und Outlier-Erkennung von eindimensionalen Spektren'
+    longDescription: >-
+      In diesem Projekt wird ein Modell trainiert, das eindimensionale Spektren (z.B. Gammaspektren) analysiert. 
+      Es beinhaltet die Präprozessierung der Spektraldaten, das Training eines Modells zur Dimensionsreduktion und eine Ausreißeranalyse. 
+      Mithilfe des Modells können (ungelabelte) Testspektren entrauscht und klassifiziert werden. 
+      Weiterhin wird eine Unsicherheit der Klassifizierung und ein Maß für die Wahrscheinlichkeit ausgegeben, dass es sich um ein Ausreißerspektrum handelt. 
+      Das Modell kann sowohl auf Single-Label-Spektren angewendet werden als auch auf Multi-Label-Spektren (Linearkombinationen der Trainingsspektren). 
+      
+    features:
+      - Präprozessierung von Spektren 
+      - Modelltraining und -test zur Entrauschung und Klassifizierung von Spektren
+      - Ausreißeranalyse zur Detektion unbekannter Spektren
+  en:
+    genericName: 'TODO gr/kl? GAMMA_FLOW: **G**uided **A**nalysis of **M**ulti-label spectra by **Ma**trix **f**actorization for **L**ightweight **O**perational **W**orkflows'
+    shortDescription: 'Training and Testing of model for denoising, classification and outlier detection of one-dimensional spectra'
+    longDescription: >-
+      In this project, a model is trained to analyze one-dimensional spectra, e.g. gamma spectra. 
+      It includes the preprocessing of spectra, training of a dimensionality reduction model and outlier analysis. 
+      As a result, (unlabelled) test spectra can be denoised and classified, including a classification uncertainty and a measure for the outlier probability. 
+      The model can be applied to single-label spectra as well as to multi-label spectra (linear combinations of the training spectra).
+
+    features:
+      - preprocessing of the spectra
+      - model training and testing for denoising and classification of spectra
+      - outlier analysis for detection of spectra unknown to the model
+legal:
+  license: 'BSD 3-Clause License'
+maintenance:
+  type: internal TODO
+  contacts: 
+    - name: 'UBA KI-Lab'
+      email: 'ki-anwendungslabor@uba.de'
+      affiliation: Umweltbundesamt
+localisation:
+  localisationReady: yes
+  availableLanguages:
+    - de
+    - en
