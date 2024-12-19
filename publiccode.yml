@@ -1,10 +1,12 @@
-publiccodeYmlVersion: '0.3' TODO
-name: 'GAMMA_FLOW' TODO groß oder klein shreiben?
-url: 'https://gitlab.opencode.de/uba-ki-lab/gamma_flow' TODO groß oder klein schreiben?
+publiccodeYmlVersion: '0.3'
+name: 'gamma_flow'
+url: 'https://gitlab.opencode.de/uba-ki-lab/gamma_flow'
 releaseDate: '2024-12-20'
 softwareVersion: '0.1'
 platforms: 
-  - linux TODO
+  - linux
+  - Microsoft Windows
+  - OSX
 categories:
   - spectral analysis
   - laboratory software
@@ -12,12 +14,12 @@ categories:
   - denoising
   - classification
   - outlier detection
-developmentStatus: concept TODO
-softwareType: 'standalone/backend' TODO
+developmentStatus: development
+softwareType: 'standalone/backend'
 description:
   de:
-    genericName: 'TODO Gr/Kl? GAMMA_FLOW: **G**uided **A**nalysis of **M**ulti-label spectra by **Ma**trix **f**actorization for **L**ightweight **O**perational **W**orkflows'
-    shortDescription: 'Training und Test eines Modells zur Entrauschung, Klassifizierung und Outlier-Erkennung von eindimensionalen Spektren'
+    genericName: 'gamma_flow'
+    shortDescription: 'Guided Analysis of Multi-label spectra by Matrix Factorization for Lightweight Operational Workflows'
     longDescription: >-
       In diesem Projekt wird ein Modell trainiert, das eindimensionale Spektren (z.B. Gammaspektren) analysiert. 
       Es beinhaltet die Präprozessierung der Spektraldaten, das Training eines Modells zur Dimensionsreduktion und eine Ausreißeranalyse. 
@@ -30,8 +32,8 @@ description:
       - Modelltraining und -test zur Entrauschung und Klassifizierung von Spektren
       - Ausreißeranalyse zur Detektion unbekannter Spektren
   en:
-    genericName: 'TODO gr/kl? GAMMA_FLOW: **G**uided **A**nalysis of **M**ulti-label spectra by **Ma**trix **f**actorization for **L**ightweight **O**perational **W**orkflows'
-    shortDescription: 'Training and Testing of model for denoising, classification and outlier detection of one-dimensional spectra'
+    genericName: 'gamma_flow'
+    shortDescription: 'Guided Analysis of Multi-label spectra by Matrix Factorization for Lightweight Operational Workflows'
     longDescription: >-
       In this project, a model is trained to analyze one-dimensional spectra, e.g. gamma spectra. 
       It includes the preprocessing of spectra, training of a dimensionality reduction model and outlier analysis. 
@@ -45,7 +47,7 @@ description:
 legal:
   license: 'BSD 3-Clause License'
 maintenance:
-  type: internal TODO
+  type: internal
   contacts: 
     - name: 'UBA KI-Lab'
       email: 'ki-anwendungslabor@uba.de'
