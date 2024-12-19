@@ -70,7 +70,7 @@ one isotope) is necessary, but also the decomposition of linear combinations of 
 isotopes (multi-label spectra). Hence, classification approaches like k-nearest-neighbours 
 that solely depend on the similarity between training and test spectra are not applicable. 
 
-This paper presents `GAMMA_FLOW`, a python package that includes the 
+This paper presents `gamma_flow`, a python package that includes the 
 - classification of test spectra to predict their constituents 
 - denoising of test spectra for better recognizability
 - outlier detection to evaluate the model's applicability to test spectra
@@ -111,7 +111,7 @@ However, there may be a need to decompound multi-label spectra (linear combinati
 and identify their constituents. 
 
 
-`GAMMA_FLOW` is a Python package that can assist researchers in the classification,
+`gamma_flow` is a Python package that can assist researchers in the classification,
 denoising and outlier detection of spectra. It includes data preprocessing, 
 data exploration, model training and testing as well as an exploratory section
 on outlier detection. 
