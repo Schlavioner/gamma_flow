@@ -147,15 +147,15 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 ├── 01_preprocessing.ipynb &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # preprocessing of spectra <br>
 ├── 02_model.ipynb &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # model training and testing <br>
 ├── 03_outlier.ipynb&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# notebook for better understanding of outlier detection <br>
-├── CONTRIBUTING <br>
-├── copyright notes and licenses.third-parties <br>
-├── example_dataset.zip <br>
-├── install.bat <br>
-├── install.sh <br>
-├── LICENSE <br>
-├── publiccode.yml <br>
+├── CONTRIBUTING &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # How to contribute to this software <br>
+├── copyright notes and licenses.third-parties &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # notes concerning imported packages <br>
+├── example_dataset.zip &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # example data for minimum example <br>
+├── install.bat &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # installation script for windows <br>
+├── install.sh &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # installation script for linux <br>
+├── LICENSE &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # software license for gamma_flow <br>
+├── publiccode.yml &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # metadata description standard for public software <br>
 ├── README                              <br>
-├── requirements.txt <br>
+├── requirements.txt &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # all required third-party packages <br>
 ├── data                               <br>
 │   ├── 1_numpy_raw &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all measured & simulated data as .npy files <br>
 │   ├── 2_Numpy_ready &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all preprocessed measured & simulated data as .npy files <br>
