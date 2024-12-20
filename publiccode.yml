@@ -2,7 +2,7 @@ publiccodeYmlVersion: '0.3'
 name: 'gamma_flow'
 url: 'https://gitlab.opencode.de/uba-ki-lab/gamma_flow'
 releaseDate: '2024-12-20'
-softwareVersion: '0.9.0'
+softwareVersion: '0.1'
 platforms: 
   - linux
   - Microsoft Windows
