@@ -169,14 +169,14 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 │   └── ... <br>
 ├── plots &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for saved plots (contains 1 folder per nuclide) <br>
 │   ├── Am241 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # folder for saved plots of Am241 <br>
-│   └── ... <br>  
-├── tools &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for python files <br>  
-│   ├── globals.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # global variables <br>  
+│   └── ... <br> 
+├── tools &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for python files <br> 
+│   ├── globals.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # global variables <br> 
 │   ├── util.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# utility functions used by all other python files / notebooks <br>
 │   ├── plotting.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # plotting routines <br>
 │   ├── tools_preprocessing.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # functions used by 01_preprocessing.ipynb <br>
 │   ├── tools_model.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 02_model.ipynb <br> 
-│   └── tools_outlier.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 03_outlier.ipynb <br>                         <br>
+│   └── tools_outlier.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 03_outlier.ipynb <br> 
 ├── trained_models &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # folder for trained model and calibration spectra <br>
 │   └── trained_dim_model.npy &emsp; &emsp; &emsp; &emsp;  # transformation matrix / loadings <br>
 
