@@ -235,7 +235,7 @@ The derived decision boundary can then be implemented in the measurement pipelin
 Apart from the jupyter notebooks and python files described above, the project includes the following python files:  
 - `globals.py`: global variables  
 - `plotting.py`: all visualizations and plotting routines    
-- `util.py`: and basic functions that are used by all notebooks  
+- `util.py`: basic functions that are used by all notebooks  
 
 
 # Acknowledgements 
