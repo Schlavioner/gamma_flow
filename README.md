@@ -144,14 +144,9 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 
 **Folder structure**
 . <br>
-├── globals.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # global variables <br>
-├── util.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# utility functions used by all other python files / notebooks <br>
 ├── 01_preprocessing.ipynb &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # preprocessing of spectra <br>
-├── tools_preprocessing.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # functions used by 01_preprocessing.ipynb <br>
 ├── 02_model.ipynb &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # model training and testing <br>
-├── tools_model.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 02_model.ipynb <br> 
 ├── 03_outlier.ipynb&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# notebook for better understanding of outlier detection <br>
-├── tools_outlier.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 03_outlier.ipynb <br> 
 ├── README                              <br>
 ├── data                               <br>
 │   ├── 1_numpy_raw &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all measured & simulated data as .npy files <br>
@@ -159,7 +154,14 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 │   └── 00_list_of_isotopes                        <br>
 ├── plots &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for saved plots (contains 1 folder per nuclide) <br>
 │   ├── Am241 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # folder for saved plots of Am241 <br>
-│   └── ...                             <br>
+│   └── ... 
+├── tools &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for python files <br>
+│   ├── globals.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # global variables <br>
+│   ├── util.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# utility functions used by all other python files / notebooks <br>
+│   ├── plotting.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # plotting routines <br>
+│   ├── tools_preprocessing.py &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # functions used by 01_preprocessing.ipynb <br>
+│   ├── tools_model.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 02_model.ipynb <br> 
+│   └── tools_outlier.py &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# functions used by 03_outlier.ipynb <br>                         <br>
 ├── trained_models &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # folder for trained model and calibration spectra <br>
 │   └── trained_dim_model.npy &emsp; &emsp; &emsp; &emsp;  # transformation matrix / loadings <br>
 
@@ -167,7 +169,7 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 
 **How to Use the Project**
 
-This project consists of several jupyter notebooks that rely on functions in corresponding python files. In addition, the python files `globals` and `utils` provide global variables and basic functions that are used by all notebooks. 
+This project consists of several jupyter notebooks that rely on functions in corresponding python files. In addition, the python files `globals` and `util` provide global variables and basic functions that are used by all notebooks. 
 The data should be analyzed in a certain order, as described below: 
 
 **01_preprocessing.ipynb (uses tools_preprocessing.py):** 

@@ -43,7 +43,6 @@ bibliography: paper_JOSS.bib
 ---
 
 # Summary
-
 Radioactive sources can be identified by measuring their emitted radiation (X-rays and gamma rays), 
 and visualizing them as a spectrum. In nuclear security applications, the resulting gamma spectra 
 have to be analyzed in real-time as immediate reaction and decision making may be required. 
@@ -58,7 +57,7 @@ typically exhibit a rather low energy resolution. In addition, a high temporal r
 required (usually around one spectrum per second), leading to a low acquisition time and a low 
 signal-to-noise ratio. Hence, the model must be robust and be able to handle noisy data.  
 - For some radioactive sources, acquisition of training spectra may be challenging. Instead, 
-spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code `[@Kulesza2022]`. In this process, 
+spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code [@Kulesza2022]. In this process, 
 energy deposition in a detector material is simulated, yielding spectra that can be used for 
 model training. However, simulated spectra and measured spectra from real-world sources 
 may differ, which may be a constraint for model performance. On this account, 
@@ -102,10 +101,10 @@ to be an outlier.
 In many research fields, spectral measurements help to assess material properties. 
 In this context, an area of interest for many researchers is the classification (automated 
 labelling) of the measured spectra. Proprietary spectral analysis software, however, are often 
-limited in their functionality and adaptability `[@Lam2011; @Naseredding2023]`. 
+limited in their functionality and adaptability [@Lam2011; @Nasereddin2023]. 
 In addition, the underlying mechanisms are usually not revealed and may act as a black-box 
-system to the user `[@El Amri2022]`. 
-On top of that, a spectral comparison is typically only possible for spectra of pure substances `[@Cowger:2021]`. 
+system to the user [@ElAmri2022]. 
+On top of that, a spectral comparison is typically only possible for spectra of pure substances [@Cowger2021]. 
 However, there may be a need to decompound multi-label spectra (linear combinations of different substances) 
 and identify their constituents. 
 
@@ -122,15 +121,16 @@ easy implementation into the measurement routine.
 The provided example dataset contains gamma spectra of several measured and simulated 
 isotopes as well as pure background spectra. 
 While this package was developed in need of an analysis tool for gamma spectra, 
-it is suitable for any one-dimensional spectra. Examplary applications encompass
-- infrared spectroscopy for the assessment of the polymer composition of 
-microplastics in water `[@Ferreiro:2023; @Whiting:2022]`
-- mass spectrometry for protein identification in snake venom 
-`[@Zelanis:2019; @Yasemin:2021]`
-- raman spectroscopy for analysis of complex pharmaceutical mixtures and detection
-of dilution products like lactose `[@Fu:2021]`
-- UV-Vis spectroscopy for detection of pesticides in surface waters `[@Guo:2020; @Qi:2024]`
-- stellar spectroscopy to infer the chemical composition of stars `[@Gray:2021]`
+it is suitable for any one-dimensional spectra.  
+Examplary applications encompass  
+- **Infrared spectroscopy** for the assessment of the polymer composition of 
+microplastics in water [@Ferreiro2023; @Whiting2022]  
+- **mass spectrometry** for protein identification in snake venom 
+[@Zelanis2019; @Yasemin2021]  
+- **Raman spectroscopy** for analysis of complex pharmaceutical mixtures and detection
+of dilution products like lactose [@Fu2021]  
+- **UV-Vis spectroscopy** for detection of pesticides in surface waters [@Guo2020; @Qi2024]  
+- **stellar spectroscopy** to infer the chemical composition of stars [@Gray2021]  
 
 
 
@@ -138,9 +138,9 @@ of dilution products like lactose `[@Fu:2021]`
 
 This python package consists of three jupyter notebooks that are executed consecutively. 
 In this section, their functionality and is outlined, with an emphasis on the mathematical 
-struction of the model. 
+structure of the model. 
 
-## Preprocessing and data exploration 
+### 1. Preprocessing and data exploration 
 The notebook `01_preprocessing.ipynb` synchronizes spectral data and provides a framework 
 of visualizations for data exploration. All functions called in this notebook are found 
 in `tools_preprocessing.py`. 
@@ -162,7 +162,7 @@ Data exploration involves the following visualizations:
     This helps to assess whether the model can handle spectra from different detectors.   
 
 
-## Model training and testing
+### 2. Model training and testing
 The notebook `02_model.ipynb` trains and tests a dimensionality reduction model that allows 
 for denoising, classification and outlier detection of test spectra. All functions called in 
 this notebook are found in `tools_model.py`.
@@ -189,13 +189,13 @@ individual isotopes. Denoised spectra, on the other hand, are computed by transf
 non-normalized scores back into spectral space (i.e. by multiplication of with the loadings matrix).
 
 In mathematical terms, this model represents a 'supervised' approach to Non-negative Matrix 
-Factorization (NMF) `[@Shreeves:2020; @Bilton:2019]`. 
+Factorization (NMF) [@Shreeves2020; @Bilton2019]. 
 While dimensionality reduction is conventionally an unsupervised task as it 
-only considers data structure `[@Olaya:2022]`, 
+only considers data structure [@Olaya2022], 
 our approach integrates labels in model training. This leads to 
 an interpretable latent space and obviates the need for an additional classification step. 
 While other supervised NMF approaches incorporate classification loss in model training 
-`[@Leuschner:2019; @Lee:2010; @Bisot:2016]`, our model focuses on a comprehensible 
+[@Leuschner2019; @Lee2010; @Bisot2016], our model focuses on a comprehensible 
 construction of the latent space. 
 
 
@@ -215,7 +215,7 @@ For all test datasets, spectra are classified and denoised. The results are visu
     - mean scores as bar plot  
 This helps to assess model performance with respect to classification and denoising. 
 
-## Outlier analysis
+### 3. Outlier analysis
 The notebook `03_outlier.ipynb` provides an exploratory approach to outliers detection, 
 i.e. to identify spectra from isotopes that were not used in model training. All functions called in 
 this notebook are found in `tools_outlier.py`. 
@@ -232,7 +232,8 @@ c) setting a manual threshold by considering accuracy, precision and recall of o
 The derived decision boundary can then be implemented in the measurement pipeline by the user.
 
 
-
+Apart from the jupyter notebooks and python files described above, the project includes the following python files:  
+- `globals.py`: 
 # Acknowledgements 
 
 We gratefully acknowledge the support provided by the Federal Ministry for the Environment, Nature Conservation 
