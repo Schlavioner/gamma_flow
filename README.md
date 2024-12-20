@@ -147,11 +147,26 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 ├── 01_preprocessing.ipynb &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # preprocessing of spectra <br>
 ├── 02_model.ipynb &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # model training and testing <br>
 ├── 03_outlier.ipynb&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# notebook for better understanding of outlier detection <br>
+├── CONTRIBUTING <br>
+├── copyright notes and licenses.third-parties <br>
+├── example_dataset.zip <br>
+├── install.bat <br>
+├── install.sh <br>
+├── LICENSE <br>
+├── publiccode.yml <br>
 ├── README                              <br>
+├── requirements.txt <br>
 ├── data                               <br>
 │   ├── 1_numpy_raw &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all measured & simulated data as .npy files <br>
 │   ├── 2_Numpy_ready &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all preprocessed measured & simulated data as .npy files <br>
 │   └── 00_list_of_isotopes                        <br>
+├── documentation <br>
+│   ├── 01_preprocessing.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of preprocessing (for example dataset) <br>
+│   ├── 02_model.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of model training (for example dataset) <br>
+│   └── 03_outlier.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of outlier analysis (for example dataset) <br>
+├── paper_JOSS &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for JOSS paper files<br>
+│   ├── paper.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # JOSS paper <br>
+│   └── ... 
 ├── plots &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for saved plots (contains 1 folder per nuclide) <br>
 │   ├── Am241 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # folder for saved plots of Am241 <br>
 │   └── ... 
