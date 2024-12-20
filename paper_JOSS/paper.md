@@ -43,7 +43,7 @@ bibliography: paper_JOSS.bib
 ---
 
 # Summary
-Radioactive sources can be identified by measuring their emitted radiation (X-rays and gamma rays), 
+Most radioactive sources can be identified by measuring their emitted radiation (X-rays and gamma rays), 
 and visualizing them as a spectrum. In nuclear security applications, the resulting gamma spectra 
 have to be analyzed in real-time as immediate reaction and decision making may be required. 
 However, the manual recognition of isotopes present in a spectrum constitutes a 
@@ -63,7 +63,7 @@ model training. However, simulated spectra and measured spectra from real-world 
 may differ, which may be a constraint for model performance. On this account, 
 preliminary data exploration is crucial to assess the similarity of spectral data from 
 different detectors and to evaluate potential data limitations.  
-- At last, not only the correct classification of single-label test spectra (stemming from 
+- Lastly, not only the correct classification of single-label test spectra (stemming from 
 one isotope) is necessary, but also the decomposition of linear combinations of various 
 isotopes (multi-label spectra). Hence, classification approaches like k-nearest-neighbours 
 that solely depend on the similarity between training and test spectra are not applicable.  
@@ -233,7 +233,11 @@ The derived decision boundary can then be implemented in the measurement pipelin
 
 
 Apart from the jupyter notebooks and python files described above, the project includes the following python files:  
-- `globals.py`: 
+- `globals.py`: global variables  
+- `plotting.py`: all visualizations and plotting routines    
+- `util.py`: and basic functions that are used by all notebooks  
+
+
 # Acknowledgements 
 
 We gratefully acknowledge the support provided by the Federal Ministry for the Environment, Nature Conservation 
