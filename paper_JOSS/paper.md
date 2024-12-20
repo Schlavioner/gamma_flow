@@ -51,27 +51,30 @@ strenous, error-prone task that depends upon expert knowledge. Hence, this raise
 the need for algorithms assisting in the initial categorization and recognizability 
 of measured gamma spectra. 
 
-The delineated use case brings along several requirements:   
-- As mobile, room temperature detectors are often deployed in nuclear security applications, the produced spectra
+The delineated use case brings along several requirements:  
+
+* As mobile, room temperature detectors are often deployed in nuclear security applications, the produced spectra
 typically exhibit a rather low energy resolution. In addition, a high temporal resolution is 
 required (usually around one spectrum per second), leading to a low acquisition time and a low 
 signal-to-noise ratio. Hence, the model must be robust and be able to handle noisy data.  
-- For some radioactive sources, acquisition of training spectra may be challenging. Instead, 
+* For some radioactive sources, acquisition of training spectra may be challenging. Instead, 
 spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code [@Kulesza2022]. In this process, 
 energy deposition in a detector material is simulated, yielding spectra that can be used for 
 model training. However, simulated spectra and measured spectra from real-world sources 
 may differ, which may be a constraint for model performance. On this account, 
 preliminary data exploration is crucial to assess the similarity of spectral data from 
 different detectors and to evaluate potential data limitations.  
-- Lastly, not only the correct classification of single-label test spectra (stemming from 
+* Lastly, not only the correct classification of single-label test spectra (stemming from 
 one isotope) is necessary, but also the decomposition of linear combinations of various 
 isotopes (multi-label spectra). Hence, classification approaches like k-nearest-neighbours 
 that solely depend on the similarity between training and test spectra are not applicable.  
 
-This paper presents `gamma_flow`, a python package that includes the   
-- classification of test spectra to predict their constituents   
-- denoising of test spectra for better recognizability   
-- outlier detection to evaluate the model's applicability to test spectra   
+This paper presents `gamma_flow`, a python package that includes the
+
+* classification of test spectra to predict their constituents   
+* denoising of test spectra for better recognizability   
+* outlier detection to evaluate the model's applicability to test spectra   
+
 
 It is based on a dimensionality reduction model that constitutes a novel, supervised approach 
 to non-negative matrix factorization (NMF). More explicitly, the spectral data matrix is 
@@ -123,14 +126,15 @@ isotopes as well as pure background spectra.
 While this package was developed in need of an analysis tool for gamma spectra, 
 it is suitable for any one-dimensional spectra.  
 Examplary applications encompass  
-- **Infrared spectroscopy** for the assessment of the polymer composition of 
+
+* **Infrared spectroscopy** for the assessment of the polymer composition of 
 microplastics in water [@Ferreiro2023; @Whiting2022]  
-- **mass spectrometry** for protein identification in snake venom 
+* **mass spectrometry** for protein identification in snake venom 
 [@Zelanis2019; @Yasemin2021]  
-- **Raman spectroscopy** for analysis of complex pharmaceutical mixtures and detection
+* **Raman spectroscopy** for analysis of complex pharmaceutical mixtures and detection
 of dilution products like lactose [@Fu2021]  
-- **UV-Vis spectroscopy** for detection of pesticides in surface waters [@Guo2020; @Qi2024]  
-- **stellar spectroscopy** to infer the chemical composition of stars [@Gray2021]  
+* **UV-Vis spectroscopy** for detection of pesticides in surface waters [@Guo2020; @Qi2024]  
+* **stellar spectroscopy** to infer the chemical composition of stars [@Gray2021]  
 
 
 
@@ -145,21 +149,23 @@ The notebook `01_preprocessing.ipynb` synchronizes spectral data and provides a 
 of visualizations for data exploration. All functions called in this notebook are found 
 in `tools_preprocessing.py`. 
 
-During preprocessing, the following steps are performed:   
-    - Spectral data files are converted from .xlsm/.spe data to .npy format and saved.  
-    - Spectra of different energy calibrations are rebinned to a standard energy calibration.  
-    - Spectral data are aggregated by label classes and detectors. Thus, it is possible to 
-    collect data from different files and formats.  
-    - Optional: The spectra per isotope are limited to a maximum number.  
-    - The preprocessed spectra are saved as .npy files.  
+During **preprocessing**, the following steps are performed:   
 
-Data exploration involves the following visualizations:  
-    - For each label class (e.g. for each isotope), the mean spectra are calculated detector-wise and compared 
-    quantitatively by the cosine similarity.  
-    - For each label class, example spectra are chosen randomly and plotted to provide an overview
-    over the data.  
-    - The cosine similarity is calculated and visualized as a matrix for all label classes and detectors. 
-    This helps to assess whether the model can handle spectra from different detectors.   
+* Spectral data files are converted from .xlsm/.spe data to .npy format and saved.  
+* Spectra of different energy calibrations are rebinned to a standard energy calibration.  
+* Spectral data are aggregated by label classes and detectors. Thus, it is possible to 
+  collect data from different files and formats.  
+* Optional: The spectra per isotope are limited to a maximum number.  
+* The preprocessed spectra are saved as .npy files.  
+
+**Data exploration** involves the following visualizations: 
+
+* For each label class (e.g. for each isotope), the mean spectra are calculated detector-wise and compared 
+  quantitatively by the cosine similarity.  
+* For each label class, example spectra are chosen randomly and plotted to provide an overview
+  over the data.  
+* The cosine similarity is calculated and visualized as a matrix for all label classes and detectors. 
+This helps to assess whether the model can handle spectra from different detectors.   
 
 
 ### 2. Model training and testing
@@ -206,13 +212,13 @@ only one isotope or pure background)
 2. test data from different detector (each spectrum including one isotope and background)
 3. multi-label test data from different detector (each spectrum including multiple isotopes and background)
 
-For all test datasets, spectra are classified and denoised. The results are visualized as  
-    - confusion matrix  
-    - misclassified spectra  
-    - denoised example spectrum  
-    - misclassification statistics  
-    - scores as scatter matrix  
-    - mean scores as bar plot  
+For all test datasets, spectra are classified and denoised. The results are visualized as 
+- confusion matrix  
+- misclassified spectra  
+- denoised example spectrum  
+- misclassification statistics  
+- scores as scatter matrix  
+- mean scores as bar plot  
 This helps to assess model performance with respect to classification and denoising. 
 
 ### 3. Outlier analysis
