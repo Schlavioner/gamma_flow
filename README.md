@@ -150,9 +150,9 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 ├── CONTRIBUTING &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # How to contribute to this software <br>
 ├── copyright notes and licenses.third-parties &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # notes concerning imported packages <br>
 ├── example_dataset.zip &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # example data for minimum example <br>
-├── install.bat &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # installation script for windows <br>
-├── install.sh &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # installation script for linux <br>
-├── LICENSE &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # software license for gamma_flow <br>
+├── install.bat &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # installation script for windows <br>
+├── install.sh &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # installation script for linux <br>
+├── LICENSE &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # software license for gamma_flow <br>
 ├── publiccode.yml &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # metadata description standard for public software <br>
 ├── README                              <br>
 ├── requirements.txt &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # all required third-party packages <br>
