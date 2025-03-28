@@ -67,11 +67,11 @@ Once you have completed the template, delete these instructions. In addition, pl
 %% Title, authors and addresses
 
 %% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for theassociated footnote;
+%% use the tnotetext command for the associated footnote;
 %% use the fnref command within \author or \address for footnotes;
-%% use the fntext command for theassociated footnote;
+%% use the fntext command for the associated footnote;
 %% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for theassociated footnote;
+%% use the cortext command for the associated footnote;
 %% use the ead command for the email address,
 %% and the form \ead[url] for the home page:
 %% \title{Title\tnoteref{label1}}
@@ -84,17 +84,28 @@ Once you have completed the template, delete these instructions. In addition, pl
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Title (Name of your software: Then a short title)}
+\title{gamma\_flow: \textbf{G}uided \textbf{A}nalysis of \textbf{M}ulti-label spectra by \textbf{Ma}trix \textbf{F}actorization for \textbf{L}ightweight \textbf{O}perational \textbf{W}orkflows}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
 %% \address[label1]{}
 %% \address[label2]{}
 
-\author[label1]{A. Author1}
-\author[label2]{A. Author2}
-\address[label1]{Author1's affiliation, address, email}
-\address[label2]{Author2's affiliation, address, email}
+\author[ki-lab]{Viola Rädle \corref{cor1}}
+\author[ki-lab]{Tilman Hartwig}
+\author[ki-lab]{Benjamin Oesen}
+\author[bfs]{Emily Alice Kröger}
+\author[bfs]{Julius Vogt}
+\author[bfs]{Eike Gericke}
+\author[bfs]{Martin Baron}
+
+\address[ki-lab]{Application Lab for AI and Big Data, German Environmental Agency, Leipzig, Germany}
+\address[bfs]{Federal Office for Radiation Protection, Berlin, Germany}
+
+\cortext[cor1]{Corresponding author: raedle.htwk@web.de}
+
+
+
 
 \begin{abstract}
 %% Text of abstract 
@@ -106,7 +117,7 @@ and some mandatory and optional metadata.}
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-keyword 1 \sep keyword 2 \sep keyword 3
+Python \sep Gamma spectroscopy \sep Non-negative Matrix Factorization \sep Classification \sep Denoising \sep Spectral Deconvolution
 
 %% PACS codes here, in the form: \PACS code \sep code
 
