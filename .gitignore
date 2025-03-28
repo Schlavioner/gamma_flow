@@ -11,4 +11,12 @@
 /.ipynb_checkpoints/
 .gitlab/
 *.pyc
+/paper_SoftwareX/*.aux
+/paper_SoftwareX/*.bbl
+/paper_SoftwareX/*.blg
+/paper_SoftwareX/*.log
+/paper_SoftwareX/*.out 
+/paper_SoftwareX/*.spl
+/paper_SoftwareX/*.gz
+
  
