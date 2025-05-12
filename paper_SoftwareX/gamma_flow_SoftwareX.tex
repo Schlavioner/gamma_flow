@@ -30,6 +30,7 @@
 
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
+\usepackage{color}
 \usepackage{hyperref}
 \setlength{\parindent}{0pt}
 %% The amsthm package provides extended theorem environments
@@ -46,24 +47,7 @@
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
 
 \begin{frontmatter}
-%--- INSTRUCTIONS TO BE DELETED OR COMMENTED BEFORE SUBMISSION 
 
-  {\large\textbf{SoftwareX article template Version 4 (November 2023)}}
-  Before you complete this template, a few important points to note:
-  \begin{itemize}
-\item	This template is for an original SoftwareX article. If you are submitting an update to a software article that has already been published, please use the Software Update Template found on the Guide for Authors page.
-\item	The format of a software article is very different to a traditional research article. To help you write yours, we have created this template. We will only consider software articles submitted using this template.
-\item	It is mandatory to publicly share the code/software referred to in your software article. You’ll find information on our software sharing criteria in the SoftwareX \href{https://www.elsevier.com/journals/softwarex/2352-7110/guide-for-authors}{Guide for Authors}.  
-\item	It’s important to consult the \href{https://www.elsevier.com/journals/softwarex/2352-7110/guide-for-authors}{Guide for Authors} when preparing your manuscript; it highlights mandatory requirements and is packed with useful advice.
-\end{itemize}
-%
-Still got questions?
-Email our editorial team at softwarex@elsevier.com.
-
-\textbf{Now you are ready to fill in the template below. As you complete each section, please carefully read the associated instructions. All sections are mandatory, unless marked optional.
-Once you have completed the template, delete these instructions. In addition, please delete the instructions in the template (the text written in italics).}
-%--- END OF INSTRUCTIONS TO BE DELETED OR COMMENTED BEFORE SUBMISSION 
- 
 %% Title, authors and addresses
 
 %% use the tnoteref command within \title for footnotes;
@@ -106,17 +90,12 @@ Once you have completed the template, delete these instructions. In addition, pl
 
 
 
-
 \begin{abstract}
-%% Text of abstract 
-\textit{Ca. 100 words. The abstract is followed by a maximum of six keywords
-and some mandatory and optional metadata.}
-
-\textit{Your main body of text (sections 1-5 below) should be a maximum 6 pages in total (excluding metadata, tables, figures, references) with a 3000-word limit (we ask that more priority is placed on the word limit versus the page count). Though we strictly insist on the author following the template, in exceptional circumstances, we can be flexible with the page numbers and word limit. In such cases, it should be discussed with the managing editor or publisher prior to submission. All queries regarding the same can be reached at softwarex@elsevier.com.}
+\catcode`\_=12
+\textbf{gamma_flow} is an open-source Python package for real-time analysis of spectral data. It supports classification, denoising, decomposition, and outlier detection of both single- and multi-component spectra. Instead of relying on large, computationally intensive models, it employs a novel supervised approach to non-negative matrix factorization (NMF) for dimensionality reduction. This ensures a fast, efficient, and adaptable analysis while reducing computational costs. \textbf{gamma_flow} achieves classification accuracies above 90\% and enables reliable automated spectral interpretation. Originally developed for gamma-ray spectra, it is applicable to any type of one-dimensional spectral data. As an open and flexible alternative to proprietary software, it supports various applications in research and industry. 
 \end{abstract}
 
 \begin{keyword}
-%% keywords here, in the form: keyword \sep keyword
 Python \sep Gamma spectroscopy \sep Non-negative Matrix Factorization \sep Classification \sep Denoising \sep Spectral Deconvolution
 
 %% PACS codes here, in the form: \PACS code \sep code
@@ -139,33 +118,32 @@ Python \sep Gamma spectroscopy \sep Non-negative Matrix Factorization \sep Class
 \hline
 \textbf{Nr.} & \textbf{Code metadata description} & \textbf{Metadata} \\
 \hline
-C1 & Current code version & For example v42 \\
+TO DO C1 & Current code version & For example v42 \\
 \hline
-C2 & Permanent link to code/repository used for this code version & For example: \url{https://github.com/mozart/mozart2} \\
+C2 & Permanent link to code/repository used for this code version & \url{https://gitlab.opencode.de/uba-ki-lab/gamma_flow} \\
 \hline
-C3  & Permanent link to Reproducible Capsule & For example: \url{https://codeocean.com/capsule/0270963/tree/v1}\\
+C3  & Permanent link to Reproducible Capsule & TO DO For example: \url{https://codeocean.com/capsule/0270963/tree/v1}\\
 \hline
-C4 & Legal Code License   & All software and code must be released under one of the pre-approved licenses listed in the \href{https://www.elsevier.com/journals/softwarex/2352-7110/guide-for-authors}{Guide for Authors}, such as Apache License, GNU General Public License (GPL) or MIT License. Write the name of the license you’ve chosen here. \\
+C4 & Legal Code License   & BSD 3-Clause "New" or "Revised" License \\
 \hline
-C5 & Code versioning system used & For example: svn, git, mercurial,
-                                   etc. (put none if none is used) \\
+C5 & Code versioning system used & git\\
 \hline
-C6 & Software code languages, tools, and services used & For example: C++, python, r, MPI, OpenCL, etc. \\
+C6 & Software code languages, tools, and services used & Python \\
 \hline
-C7 & Compilation requirements, operating environments \& dependencies & \\
+C7 & Compilation requirements, operating environments \& dependencies & TO DO. Jupyter?  \\
 \hline
-C8 & If available Link to developer documentation/manual & For example: \url{http://mozart.github.io/documentation/} \\
+C8 & If available Link to developer documentation/manual & \url{https://gitlab.opencode.de/uba-ki-lab/gamma_flow/-/blob/main/README.md?ref_type=heads} \\
 \hline
-C9 & Support email for questions & \\
+C9 & Support email for questions & raedle.htwk@web.de\\
 \hline
 \end{tabular}
 \caption{Code metadata (mandatory)}
 \label{codeMetadata} 
 \end{table}
 
-\textit{Optionally, you can provide information about the current executable
+\textcolor{red}{\textit{Optionally, you can provide information about the current executable
 software version filling in the left column of
-Table~\ref{executabelMetadata}. Please leave the first column as it is.}
+Table~\ref{executabelMetadata}. Please leave the first column as it is.} FRAGE: Welche Tabelle sollen wir ausfüllen?}
 
 \begin{table}[!h]
 \begin{tabular}{|l|p{6.5cm}|p{6.5cm}|}
@@ -223,6 +201,19 @@ S8 & Support email for questions & \\
 functions of your software/code.}
 
 \textit{\textbf{Optional}: you may include one explanatory  video or screencast that will appear next to your article, in the right hand side panel. Please upload any video as a single supplementary file with your article. Only one MP4 formatted, with 150MB maximum size, video is possible per article. Recommended video dimensions are 640 x 480 at a maximum of 30 frames / second. Prior to submission please test and validate your .mp4 file at  \url{http://elsevier-apps.sciverse.com/GadgetVideoPodcastPlayerWeb/verification} . This tool will display your video exactly in the same way as it will appear on ScienceDirect. }
+
+\textcolor{blue}{
+Plots: 
+\begin{itemize}
+	\item Loadings
+	\item Scores (different detector, single-label class.)
+	\item Confusion matrix (different detector, single-label class.)
+	\item Denoised spectrum
+	\item Outlier: Feature importance (decision tree)
+\end{itemize}
+Problem: Diese Figures wollten wir eigentlich erst im wiss. Paper bringen! 
+Alternative: Nur graphical abstract? Wirkt auf mich zu wenig für diese Section...
+}
 
 \section{Impact}
 \textit{This is the main section of the article and reviewers will weight it appropriately.
