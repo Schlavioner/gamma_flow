@@ -181,7 +181,6 @@ S8 & Support email for questions & \\
     \item \textit{Introduce related work in literature (cite or list algorithms used, other software etc.).}
 \end{itemize}
 
-\textcolor{blue}{\textbf{übernommen aus JOSS-Summary (part 1)}
 Most radioactive sources can be identified by measuring their emitted radiation (X-rays and gamma rays), and visualizing them as a spectrum. In nuclear security applications, the resulting gamma spectra have to be analyzed in real-time as immediate reaction and decision making may be required. 
 However, the manual recognition of isotopes present in a spectrum constitutes a 
 strenous, error-prone task that depends upon expert knowledge. Hence, this raises 
@@ -190,26 +189,18 @@ of measured gamma spectra.
 The delineated use case brings along several requirements:  
 \begin{itemize}
 \item As mobile, room temperature detectors are often deployed in nuclear security applications, the produced spectra typically exhibit a rather low energy resolution. In addition, a high temporal resolution is required (usually around one spectrum per second), leading to a low acquisition time and a low signal-to-noise ratio. Hence, the model must be robust and be able to handle noisy data.  
-\item For some radioactive sources, acquisition of training spectra may be challenging. Instead, 
-spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code \cite{Kulesza2022}. In this process, 
-energy deposition in a detector material is simulated, yielding spectra that can be used for 
-model training. However, simulated spectra and measured spectra from real-world sources 
-may differ, which may be a constraint for model performance. On this account, 
-preliminary data exploration is crucial to assess the similarity of spectral data from 
-different detectors and to evaluate potential data limitations.  
-\item Lastly, not only the correct classification of single-label test spectra (stemming from 
-one isotope) is necessary, but also the decomposition of linear combinations of various 
-isotopes (multi-label spectra). Hence, classification approaches like k-nearest-neighbours 
-that solely depend on the similarity between training and test spectra are not applicable.  
+\item For some radioactive sources, acquisition of training spectra may be challenging. Instead, spectra of those isotopes are simulated using Monte Carlo N-Particle (MCNP) code \cite{Kulesza2022}. In this process, energy deposition in a detector material is simulated, yielding spectra that can be used for model training. However, simulated spectra and measured spectra from real-world sources may differ, which may be a constraint for model performance. On this account, preliminary data exploration is crucial to assess the similarity of spectral data from different detectors and to evaluate potential data limitations.  
+\item Lastly, not only the correct classification of single-label test spectra (stemming from one isotope) is necessary, but also the decomposition of linear combinations of various isotopes (multi-label spectra). Hence, classification approaches like k-nearest-neighbours that solely depend on the similarity between training and test spectra are not applicable.  
 \end{itemize} 
-This paper presents \textbf{gamma\_flow}, a python package that includes the
+This paper presents \textbf{gamma\_flow}, a Python package designed for the real-time analysis of one-dimensional spectra. It was developed in response to the practical challenges described above and supports the following tasks:
 \begin{itemize}
-\item classification of test spectra to predict their constituents   
-\item denoising of test spectra for better recognizability   
-\item outlier detection to evaluate the model's applicability to test spectra   
+\item classification of test spectra to identify their constituents,  
+\item denoising to enhence visibility and reduce measurement noise,
+\item outlier detection to evaluate the model's applicability to test spectra.   
 \end{itemize}
-}
-\textcolor{red}{To Do: kurz und schwammig beschreiben, was noch toll ist.}
+
+Originally developed for gamma spectroscopy, \textbf{gamma\_flow} is applicable to various domains including material science, chemistry, and environmental monitoring. It facilitates automated analysis in settings where fast interpretation of spectral data is essential. By integrating supervised dimensionality reduction with classical signal processing techniques, it extends prior work such as that of Bilton et al. \cite{Bilton2019}, contributing to reproducible and interpretable spectral analysis pipelines.
+
 
 
 \section{Software description}
@@ -232,19 +223,104 @@ to be an outlier.}
 
 \subsection{Software architecture}
 \textit{  Give a short overview of the overall software architecture; provide a pictorial overview where possible; for example, an image showing the components. If necessary, provide implementation details.}
-\textcolor{red}{Soll hier ein Schaubild erstellt werden von jupyter-files und auf welche python-files sie zugreifen?}
+\textcolor{red}{Soll hier ein Schaubild erstellt werden von jupyter-files und auf welche python-files sie zugreifen? To do: Jore fragen, automatisches Schaubild erstellen in VSCode? Pycallgraph, mermaid,...}
 
  \subsection{Software functionalities}
 \textit{Present the major functionalities of the software.}
-\textcolor{blue}{
-Einteilung dieses Abschnitts:
-\subsubsection{Preprocessing of the spectra}
-\subsubsection{Model training (inkl. NMF)}
-\subsubsection{Model application: Classification and Decomposition}
-\subsubsection{Model application: Denoising}
-\subsubsection{Model application: Outlier detection}
-Bzw. hier einfügen: alles aus JOSS - Methodology and structure
-}
+
+This python package consists of three jupyter notebooks that are executed consecutively. 
+In this section, their functionality and is outlined, with an emphasis on the mathematical 
+structure of the model. 
+
+\subsubsection{Preprocessing and data exploration}  
+The notebook \texttt{01\_preprocessing.ipynb} synchronizes spectral data and provides a framework 
+of visualizations for data exploration. All functions called in this notebook are found 
+in \texttt{tools\_preprocessing.py}. 
+
+During \textbf{preprocessing}, the following steps are performed:   
+\begin{itemize}
+\item Spectral data files are converted from .xlsm/.spe data to .npy format and saved.  
+\item Spectra of different energy calibrations are rebinned to a standard energy calibration.  
+\item Spectral data are aggregated by label classes and detectors. Thus, it is possible to 
+  collect data from different files and formats.  
+\item Optional: The spectra per isotope are limited to a maximum number.  
+\item The preprocessed spectra are saved as .npy files.  
+\end{itemize}
+
+
+\textbf{Data exploration} involves the following visualizations: 
+\begin{itemize}
+\item For each label class (e.g. for each isotope), the mean spectra are calculated detector-wise and compared 
+  quantitatively by the cosine similarity.  
+\item For each label class, example spectra are chosen randomly and plotted to provide an overview
+  over the data.  
+\item The cosine similarity is calculated and visualized as a matrix for all label classes and detectors. 
+\end{itemize}
+This helps to assess whether the model can handle spectra from different detectors.   
+
+
+\subsubsection{Model training and testing}
+The notebook \texttt{02\_model.ipynb} trains and tests a dimensionality reduction model that allows for denoising, classification and outlier detection of test spectra. All functions called in this notebook are found in \texttt{tools\_model.py}.
+
+The dimensionality reduction model presented in this paper comprises a matrix decomposition of spectral data. More precisely, the original spectra matrix $X$ is reconstructed by two low-rank matrices $S$ and $L$:  
+$$ X \approx S  L^{T} $$  
+with $S$: scores matrix (spectra in latent space) \\  
+\hspace*{0.8cm} $L$: loadings matrix (transformation matrix or latent components). \\ 
+
+\begin{figure}
+\includegraphics[width=\textwidth]{figure_1.png}
+\label{fig:matrix_decomposition}
+\end{figure}
+
+As illustrated in Figure \ref{fig:matrix_decomposition}, original spectral data can be compressed into $k_\mathrm{isotopes}$ dimensions. To ensure a conclusive assignment of the latent space axes to the isotopes (i.e. one axis stands for of one isotope), the loadings matrix is predefined as the mean spectra of the $k_\mathrm{isotopes}$ isotopes. 
+
+During model training, mean spectra for all isotopes are calculated. The scores are then derived by non-negative least squares fit of the original spectra to the loadings matrix. Thus, the components of the normalized scores vectors directly reveal the contributions of the individual isotopes. Denoised spectra, on the other hand, are computed by transforming the non-normalized scores back into spectral space (i.e. by multiplication of with the loadings matrix).
+
+In mathematical terms, this model represents a 'supervised' approach to Non-negative Matrix Factorization (NMF) \cite{Shreeves2020, Bilton2019}. 
+While dimensionality reduction is conventionally an unsupervised task as it 
+only considers data structure \cite{Olaya2022}, our approach integrates labels in model training. This leads to an interpretable latent space and obviates the need for an additional classification step. While other supervised NMF approaches incorporate classification loss in model training \cite{Leuschner2019, Lee2010, Bisot2016}, our model focuses on a comprehensible construction of the latent space. 
+
+
+The model is trained using spectral data from the specified detectors \texttt{dets\_tr} and isotopes \texttt{isotopes\_tr}. Subsequently, it is inferenced (i.e. scores are calculated) on three different test datasets:
+\begin{enumerate}
+\item validation data/holdout data from same detector as used in training (each spectrum including 
+only one isotope or pure background)
+\item test data from different detector (each spectrum including one isotope and background)
+\item multi-label test data from different detector (each spectrum including multiple isotopes and background)
+\end{enumerate}
+
+
+For all test datasets, spectra are classified and denoised. The results are visualized as 
+\begin{itemize}
+\item confusion matrix  
+\item misclassified spectra  
+\item denoised example spectrum  
+\item misclassification statistics  
+\item scores as scatter matrix  
+\item mean scores as bar plot
+\end{itemize}
+  
+This helps to assess model performance with respect to classification and denoising. 
+
+\subsubsection{Outlier analysis}
+The notebook \texttt{03\_outlier.ipynb} provides an exploratory approach to outliers detection, i.e. to identify spectra from isotopes that were not used in model training. All functions called in this notebook are found in \texttt{tools\_outlier.py}. 
+
+To simulate outlier spectra, a mock dataset is generated by training a model after removing one specific isotope. The trained model is then inferenced on spectra of this unknown isotope to investigate its behaviour with outliers. 
+First, the resulting latent space distribution and further meta data are analyzed to distinguish known from unknown spectra. Using a decision tree, the most informative feature is identified. 
+Next, a decision boundary is derived for this feature, by  \\
+a) using the condition of the first split in the decision tree \\
+b) fitting a logistic regression (sigmoid function) to the data \\ 
+c) setting a manual threshold by considering accuracy, precision and recall of outlier identification. \\
+The derived decision boundary can then be implemented in the measurement pipeline by the user. \\
+
+
+Apart from the jupyter notebooks and python files described above, the project includes the following python files:  
+\begin{itemize}
+\item \texttt{globals.py}: global variables  
+\item \texttt{plotting.py}: all visualizations and plotting routines    
+\item \texttt{util.py}: basic functions that are used by all notebooks  
+\end{itemize}
+
   
 \subsection{Sample code snippets analysis (optional)}
 \textcolor{red}{Würde ich eher weglassen? Ggf. Das Modell vorstellen, aber eher nicht}
@@ -259,16 +335,11 @@ functions of your software/code.}
 \textcolor{blue}{
 Plots: 
 \begin{itemize}
-	\item ggf. Loadings
-	\item ggf. Scores (different detector, single-label class.)
 	\item Confusion matrix (different detector, single-label class.)
 	\item Denoised spectrum
-	\item Outlier: Feature importance (decision tree)
+	\item ggf. Outlier: Feature importance (decision tree)
 \end{itemize}}
-\textcolor{red}{
-Problem: Diese Figures wollten wir eigentlich erst im wiss. Paper bringen! 
-Alternative: Nur graphical abstract? Wirkt auf mich zu wenig für diese Section...
-}
+
 
 \section{Impact}
 \textit{This is the main section of the article and reviewers will weight it appropriately.
@@ -322,8 +393,9 @@ of dilution products like lactose \cite{Fu2021}
 
 \section*{Acknowledgements}
 \label{}
-\textit{Optional. You can use this section to acknowledge colleagues who don’t qualify as a co-author but helped you in some way. }
-to do (s. Joss)
+We gratefully acknowledge the support provided by the Federal Ministry for the Environment, Nature Conservation and Nuclear Safety (BMUV), whose funding has been instrumental in enabling us to achieve our research objectives and explore new directions. 
+We also extend our appreciation to Martin Bussick in his function as the AI coordinator. 
+Additionally, we thank the entire AI-Lab team for their support and inspiration, with special recognition to Ruth Brodte for guidance on legal and licensing matters.
 
 
 %% The Appendices part is started with the command \appendix;
