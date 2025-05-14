@@ -111,10 +111,9 @@ Python \sep Gamma spectroscopy \sep Non-negative Matrix Factorization \sep Class
 %\linenumbers
 
 \section*{Metadata}
-\label{}
 \textit{The ancillary data table~\ref{codeMetadata} is required for the sub-version of the codebase. Please replace the italicized text in the right column with the correct information about your current code and leave the left column untouched.}
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{tabular}{|l|p{6.5cm}|p{6.5cm}|}
 \hline
 \textbf{Nr.} & \textbf{Code metadata description} & \textbf{Metadata} \\
@@ -146,7 +145,7 @@ C9 & Support email for questions & raedle.htwk@web.de\\
 software version filling in the left column of
 Table~\ref{executabelMetadata}. Please leave the first column as it is.} FRAGE: Welche Tabelle sollen wir ausfüllen?}
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{tabular}{|l|p{6.5cm}|p{6.5cm}|}
 \hline
 \textbf{Nr.} & \textbf{(Executable) software metadata description} & \textbf{Please fill in this column} \\
@@ -207,12 +206,17 @@ If a test spectrum of an isotope is unknown to the model (i.e. this isotope was 
 to be an outlier.
 
 \subsection{Software architecture}
-\textit{  Give a short overview of the overall software architecture; provide a pictorial overview where possible; for example, an image showing the components. If necessary, provide implementation details.}
-\textcolor{red}{Soll hier ein Schaubild erstellt werden von jupyter-files und auf welche python-files sie zugreifen? To do: Jore fragen, automatisches Schaubild erstellen in VSCode? Pycallgraph, mermaid,...}
+\textbf{gamma\_flow} consists of three jupyter notebooks that are executed consecutively, as depicted in Figure \ref{fig:software_architecture}. Each imports functions from a designated Python file, e.g. all functions called in \texttt{02\_model.ipynb} are found in \texttt{tools\_model.py}. In addition, the Python files \texttt{util.py}, \texttt{globals.py} and \texttt{plotting.py} provide elementary for all three notebooks. 
 
- \subsection{Software functionalities}
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{software_architecture_gamma_flow.pdf}
+\label{fig:software_architecture}
+\caption{Software architecture of \textbf{gamma\_flow}: The jupyter notebooks \texttt{01\_preprocessing.ipynb}, \texttt{02\_model.ipynb} and \texttt{03\_outlier.ipynb} are executed consecutively, using functions from different Python files. }
+\end{figure}
 
-This python package consists of three jupyter notebooks that are executed consecutively. In this section, their functionality is outlined, with an emphasis on the mathematical structure of the model. 
+\subsection{Software functionalities}
+
+In this section, the functionality of the software is outlined, with an emphasis on the mathematical structure of the model. To this end, the procedures realised in the three jupyter notebooks \texttt{01\_preprocessing.ipynb}, \texttt{02\_model.ipynb} and \texttt{03\_outlier.ipynb} are delineated. 
 
 \subsubsection{Preprocessing and data exploration}  
 The notebook \texttt{01\_preprocessing.ipynb} synchronizes spectral data and provides a framework of visualizations for data exploration. All functions called in this notebook are found in \texttt{tools\_preprocessing.py}. 
@@ -307,7 +311,7 @@ Apart from the jupyter notebooks and python files described above, the project i
 \textit{Provide at least one illustrative example to demonstrate the major
 functions of your software/code.}
 
-\textit{\textbf{Optional}: you may include one explanatory  video or screencast that will appear next to your article, in the right hand side panel. Please upload any video as a single supplementary file with your article. Only one MP4 formatted, with 150MB maximum size, video is possible per article. Recommended video dimensions are 640 x 480 at a maximum of 30 frames / second. Prior to submission please test and validate your .mp4 file at  \url{http://elsevier-apps.sciverse.com/GadgetVideoPodcastPlayerWeb/verification} . This tool will display your video exactly in the same way as it will appear on ScienceDirect. }
+\textit{\textbf{Optional}: you may include one explanatory  video or screencast that will appear next to your article, in the right hand side panel. Please upload any video as a single supplementary file with your article. Only one MP4 formatted, with 150MB maximum size, video is possible per article. Recommended video dimensions are 640 x 480 at a maximum of 30 frames / second. Prior to submission please test and validate your .mp4 file at  \url{http://elsevier-apps.sciverse.com/GadgetVideoPodcastPlayerWeb/verification}. This tool will display your video exactly in the same way as it will appear on ScienceDirect. }
 
 \textcolor{blue}{
 Plots: 
@@ -341,7 +345,6 @@ of dilution products like lactose \cite{Fu2021}
 \textcolor{red}{... to do}
 
 \section*{Acknowledgements}
-\label{}
 We gratefully acknowledge the support provided by the Federal Ministry for the Environment, Nature Conservation and Nuclear Safety (BMUV), whose funding has been instrumental in enabling us to achieve our research objectives and explore new directions. 
 We also extend our appreciation to Martin Bussick in his function as the AI coordinator. 
 Additionally, we thank the entire AI-Lab team for their support and inspiration, with special recognition to Ruth Brodte for guidance on legal and licensing matters.
@@ -349,13 +352,15 @@ Additionally, we thank the entire AI-Lab team for their support and inspiration,
 \bibliographystyle{elsarticle-num} 
 \bibliography{gamma_flow_SoftwareX.bib}
 
+
+\textcolor{red}{
 \textit{If the software repository you used supplied a DOI or another
 Persistent IDentifier (PID), please add a reference for your software
 here. For more guidance on software citation, please see our guide for
 authors or \href{https://f1000research.com/articles/9-1257/v2}{this
   article on the essentials of software citation by FORCE 11}, of
 which Elsevier is a member.}
-
+}
 
 \end{document}
 \endinput
