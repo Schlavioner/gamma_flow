@@ -90,17 +90,19 @@
 
 
 \begin{abstract}
-\textcolor{blue}{
-\textbf{gamma\_flow} is an open-source Python package for real-time analysis of spectral data. It supports classification, denoising, decomposition, and outlier detection of both single- and multi-component spectra. Instead of relying on large, computationally intensive models, it employs a novel supervised approach to non-negative matrix factorization (NMF) for dimensionality reduction. This ensures a fast, efficient, and adaptable analysis while reducing computational costs. \textbf{gamma\_flow} achieves classification accuracies above 90\% and enables reliable automated spectral interpretation. Originally developed for gamma-ray spectra, it is applicable to any type of one-dimensional spectral data. As an open and flexible alternative to proprietary software, it supports various applications in research and industry.} 
+\textbf{gamma\_flow} is an open-source Python package for real-time analysis of spectral data. It supports classification, denoising, decomposition, and outlier detection of both single- and multi-component spectra. Instead of relying on large, computationally intensive models, it employs a novel supervised approach to non-negative matrix factorization (NMF) for dimensionality reduction. This ensures a fast, efficient, and adaptable analysis while reducing computational costs. \textbf{gamma\_flow} achieves classification accuracies above 90\% and enables reliable automated spectral interpretation. Originally developed for gamma-ray spectra, it is applicable to any type of one-dimensional spectral data. As an open and flexible alternative to proprietary software, it supports various applications in research and industry.
 \end{abstract}
 
 \begin{keyword}
 Python \sep Gamma spectroscopy \sep Non-negative Matrix Factorization \sep Classification \sep Denoising \sep Spectral Deconvolution
 
-%% PACS codes here, in the form: \PACS code \sep code
+\PACS 07.05.Kf % Data processing: signal processing and data analysis in physics instrumentation
+\sep 29.30.Kv % X- and gamma-ray spectroscopy (in nuclear instrumentation)
+\sep 02.50.Sk % Multivariate analysis (Statistische Verfahren, Machine Learning) 
 
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
+\MSC[2020] 15A23 % Factorization of matrices
+\sep 62H25 % Factor analysis and principal components; correspondence analysis 
+\sep 65D10 % Smoothing, curve fitting, Denoising
 
 \end{keyword}
 
@@ -117,19 +119,19 @@ Python \sep Gamma spectroscopy \sep Non-negative Matrix Factorization \sep Class
 \hline
 \textbf{Nr.} & \textbf{Code metadata description} & \textbf{Metadata} \\
 \hline
-TO DO C1 & Current code version & For example v42 \\
+TO DO C1 & Current code version & \textcolor{red}{TO DO! For example v42} \\
 \hline
 C2 & Permanent link to code/repository used for this code version & \url{https://gitlab.opencode.de/uba-ki-lab/gamma_flow} \\
 \hline
-C3  & Permanent link to Reproducible Capsule & TO DO For example: \url{https://codeocean.com/capsule/0270963/tree/v1}\\
+C3  & Permanent link to Reproducible Capsule & - \\
 \hline
-C4 & Legal Code License   & BSD 3-Clause "New" or "Revised" License \\
+C4 & Legal Code License & BSD 3-Clause "New" or "Revised" License \\
 \hline
 C5 & Code versioning system used & git\\
 \hline
 C6 & Software code languages, tools, and services used & Python \\
 \hline
-C7 & Compilation requirements, operating environments \& dependencies & TO DO. Jupyter?  \\
+C7 & Compilation requirements, operating environments \& dependencies & matplotlib, numpy, pandas, scikit\_learn, scipy, seaborn, openpyxl \\
 \hline
 C8 & If available Link to developer documentation/manual & \url{https://gitlab.opencode.de/uba-ki-lab/gamma_flow/-/blob/main/README.md?ref_type=heads} \\
 \hline
@@ -172,14 +174,6 @@ S8 & Support email for questions & \\
 
 
 \section{Motivation and significance}
-\textit{In this section, we want you to introduce the scientific background and the motivation for developing the software.}
-
-\begin{itemize}
-    \item \textit{Explain why the software is important and describe the exact (scientific) problem(s) it solves.}
-    \item \textit{Indicate in what way the software has contributed (or will contribute in the future) to the process of scientific discovery; if available, please cite a research paper using the software.}
-    \item \textit{Provide a description of the experimental setting. (How does the user use the software?)}
-    \item \textit{Introduce related work in literature (cite or list algorithms used, other software etc.).}
-\end{itemize}
 
 Most radioactive sources can be identified by measuring their emitted radiation (X-rays and gamma rays), and visualizing them as a spectrum. In nuclear security applications, the resulting gamma spectra have to be analyzed in real-time as immediate reaction and decision making may be required. 
 However, the manual recognition of isotopes present in a spectrum constitutes a 
@@ -205,37 +199,23 @@ Originally developed for gamma spectroscopy, \textbf{gamma\_flow} is applicable 
 
 \section{Software description}
 
-\textit{Describe the software. Provide enough detail to help the reader understand its impact. }
-\textcolor{blue}{
-\textbf{gamma\_flow} is based on a dimensionality reduction model that constitutes a novel, supervised approach to non-negative matrix factorization (NMF). More explicitly, the spectral data matrix is decomposed into the product of two low-rank matrices denoted as the scores (spectral data in latent space) and the loadings (transformation matrix or latent components). The loadings matrix is predefined and consists of the mean spectra of the training isotopes. Hence, by design, the scores axes correspond to the share of an isotope in a spectrum, resulting in an interpretable latent space. 
-As a result, the classification of a test spectrum can be read directly from its (normalized) 
-scores. In particular, shares of individual isotopes in a multi-label spectrum can be 
-identified. This leads to an explainable quantitative prediction of the spectral constituents. 
-The scores can be transformed back into spectral space by applying the inverse model. This 
-inverse transformation rids the test spectrum of noise and results in a smooth, easily 
-recognizable denoised spectrum. 
-If a test spectrum of an isotope is unknown to the model (i.e. this isotope was not included in 
-model training), it can still be projected into latent space. However, when the latent space 
-information (scores) are decompressed, the resulting denoised spectrum does not resemble the 
-original spectrum any more. Some original features may not be captured while new peaks may have 
-been fabricated. This can be quantified by calculating the cosine similarity between the original and the denoised spectrum, which can serve as an indicator of a test spectrum 
-to be an outlier.}
+\textbf{gamma\_flow} is based on a dimensionality reduction model that constitutes a novel, supervised approach to non-negative matrix factorization (NMF). More explicitly, the spectral data matrix is decomposed into the product of two low-rank matrices denoted as the scores (spectral data in latent space) and the loadings (transformation matrix or latent components). The loadings matrix is predefined and consists of the mean spectra of the training isotopes. Hence, by design, the scores axes correspond to the share of an isotope in a spectrum, resulting in an interpretable latent space. As a result, the classification of a test spectrum can be read directly from its (normalized) scores. In particular, shares of individual isotopes in a multi-label spectrum can be identified. This leads to an explainable quantitative prediction of the spectral constituents. 
+
+The scores can be transformed back into spectral space by applying the inverse model. This inverse transformation rids the test spectrum of noise and results in a smooth, easily recognizable denoised spectrum. 
+
+If a test spectrum of an isotope is unknown to the model (i.e. this isotope was not included in model training), it can still be projected into latent space. However, when the latent space information (scores) are decompressed, the resulting denoised spectrum does not resemble the original spectrum any more. Some original features may not be captured while new peaks may have been fabricated. This can be quantified by calculating the cosine similarity between the original and the denoised spectrum, which can serve as an indicator of a test spectrum 
+to be an outlier.
 
 \subsection{Software architecture}
 \textit{  Give a short overview of the overall software architecture; provide a pictorial overview where possible; for example, an image showing the components. If necessary, provide implementation details.}
 \textcolor{red}{Soll hier ein Schaubild erstellt werden von jupyter-files und auf welche python-files sie zugreifen? To do: Jore fragen, automatisches Schaubild erstellen in VSCode? Pycallgraph, mermaid,...}
 
  \subsection{Software functionalities}
-\textit{Present the major functionalities of the software.}
 
-This python package consists of three jupyter notebooks that are executed consecutively. 
-In this section, their functionality and is outlined, with an emphasis on the mathematical 
-structure of the model. 
+This python package consists of three jupyter notebooks that are executed consecutively. In this section, their functionality is outlined, with an emphasis on the mathematical structure of the model. 
 
 \subsubsection{Preprocessing and data exploration}  
-The notebook \texttt{01\_preprocessing.ipynb} synchronizes spectral data and provides a framework 
-of visualizations for data exploration. All functions called in this notebook are found 
-in \texttt{tools\_preprocessing.py}. 
+The notebook \texttt{01\_preprocessing.ipynb} synchronizes spectral data and provides a framework of visualizations for data exploration. All functions called in this notebook are found in \texttt{tools\_preprocessing.py}. 
 
 During \textbf{preprocessing}, the following steps are performed:   
 \begin{itemize}
@@ -243,7 +223,7 @@ During \textbf{preprocessing}, the following steps are performed:
 \item Spectra of different energy calibrations are rebinned to a standard energy calibration.  
 \item Spectral data are aggregated by label classes and detectors. Thus, it is possible to 
   collect data from different files and formats.  
-\item Optional: The spectra per isotope are limited to a maximum number.  
+\item Optional: The spectra per isotope are limited to a maximum number (for class balance).  
 \item The preprocessed spectra are saved as .npy files.  
 \end{itemize}
 
@@ -321,9 +301,6 @@ Apart from the jupyter notebooks and python files described above, the project i
 \item \texttt{util.py}: basic functions that are used by all notebooks  
 \end{itemize}
 
-  
-\subsection{Sample code snippets analysis (optional)}
-\textcolor{red}{Würde ich eher weglassen? Ggf. Das Modell vorstellen, aber eher nicht}
 
 \section{Illustrative examples}
 
@@ -342,38 +319,12 @@ Plots:
 
 
 \section{Impact}
-\textit{This is the main section of the article and reviewers will weight it appropriately.
-Please indicate:}
-\begin{itemize}
-    \item \textit{Any new research questions that can be pursued as a result of your software.}
-    \item \textit{In what way, and to what extent, your software improves the pursuit of existing research questions.}
-    \item \textit{Any ways in which your software has changed the daily practice of its users.}
-    \item \textit{How widespread the use of the software is within and outside the intended user group (downloads, number of users if your software is a service, citable publications, etc.).}
-    \item \textit{How the software is being used in commercial settings and/or how it has led to the creation of spin-off companies.}
-    \end{itemize}
-\textit{Please note that points 1 and 2 are best demonstrated by
-  references to citable publications.}
-
-\textcolor{blue}{\textbf{übernommen aus JOSS-Statement of need}:
 In many research fields, spectral measurements help to assess material properties. 
-In this context, an area of interest for many researchers is the classification (automated 
-labelling) of the measured spectra. Proprietary spectral analysis software, however, are often 
-limited in their functionality and adaptability \cite{Lam2011, Nasereddin2023}. 
-In addition, the underlying mechanisms are usually not revealed and may act as a black-box 
-system to the user \cite{ElAmri2022}. On top of that, a spectral comparison is typically only possible for spectra of pure substances \cite{Cowger2021}. However, there may be a need to decompound multi-label spectra (linear combinations of different substances) and identify their constituents. \newline
-\textbf{gamma\_flow} is a Python package that can assist researchers in the classification,
-denoising and outlier detection of spectra. It includes data preprocessing, 
-data exploration, model training and testing as well as an exploratory section
-on outlier detection. 
-Making use of matrix decomposition methods, the designed model is lean and performant. 
-Training and inference do not require special hardware or extensive computational
-power. This allows real-time application on ordinary laboratory computers and 
-easy implementation into the measurement routine. 
-The provided example dataset contains gamma spectra of several measured and simulated 
-isotopes as well as pure background spectra. 
-While this package was developed in need of an analysis tool for gamma spectra, 
-it is suitable for any one-dimensional spectra.  
-Examplary applications encompass  
+In this context, an area of interest for many researchers is the classification (automated labelling) of the measured spectra. Proprietary spectral analysis software, however, are often limited in their functionality and adaptability \cite{Lam2011, Nasereddin2023}. In addition, the underlying mechanisms are usually not revealed and may act as a black-box system to the user \cite{ElAmri2022}. On top of that, a spectral comparison is typically only possible for spectra of pure substances \cite{Cowger2021}. However, there may be a need to decompound multi-label spectra (linear combinations of different substances) and identify their constituents. 
+
+\textbf{gamma\_flow} is a Python package that can assist researchers in the classification, denoising and outlier detection of spectra. It includes data preprocessing, data exploration, model training and testing as well as an exploratory section on outlier detection. Making use of matrix decomposition methods, the designed model is lean and performant. Training and inference do not require special hardware or extensive computational power. This allows real-time application on ordinary laboratory computers and easy implementation into the measurement routine. 
+
+The provided example dataset contains gamma spectra of several measured and simulated isotopes as well as pure background spectra. While this package was developed in need of an analysis tool for gamma spectra, it is suitable for any one-dimensional spectra. Examplary applications encompass  
 \begin{itemize}
 \item \textbf{Infrared spectroscopy} for the assessment of the polymer composition of 
 microplastics in water \cite{Ferreiro2023, Whiting2022}  
@@ -384,12 +335,10 @@ of dilution products like lactose \cite{Fu2021}
 \item \textbf{UV-Vis spectroscopy} for detection of pesticides in surface waters \cite{Guo2020, Qi2024}
 \item \textbf{stellar spectroscopy} to infer the chemical composition of stars \cite{Gray2021}  
 \end{itemize}
-}
-
 
 
 \section{Conclusions}
-... to do
+\textcolor{red}{... to do}
 
 \section*{Acknowledgements}
 \label{}
@@ -397,33 +346,8 @@ We gratefully acknowledge the support provided by the Federal Ministry for the E
 We also extend our appreciation to Martin Bussick in his function as the AI coordinator. 
 Additionally, we thank the entire AI-Lab team for their support and inspiration, with special recognition to Ruth Brodte for guidance on legal and licensing matters.
 
-
-%% The Appendices part is started with the command \appendix;
-%% appendix sections are then done as normal sections
-%% \appendix
-
-%% \section{}
-%% \label{}
-
-%% References:
-%% If you have bibdatabase file and want bibtex to generate the
-%% bibitems, please use
-%%
-%%  \bibliographystyle{elsarticle-num} 
-%%  \bibliography{<your bibdatabase>}
-
-%% else use the following coding to input the bibitems directly in the
-%% TeX file.
 \bibliographystyle{elsarticle-num} 
 \bibliography{gamma_flow_SoftwareX.bib}
-\begin{thebibliography}{00}
-
-%% \bibitem{label}
-%% Text of bibliographic item
-
-\bibitem{} Use this style of ordering. References in-text should also use a similar style.
-
-\end{thebibliography}
 
 \textit{If the software repository you used supplied a DOI or another
 Persistent IDentifier (PID), please add a reference for your software
@@ -431,13 +355,6 @@ here. For more guidance on software citation, please see our guide for
 authors or \href{https://f1000research.com/articles/9-1257/v2}{this
   article on the essentials of software citation by FORCE 11}, of
 which Elsevier is a member.}
-
-\large{\textbf{Reminder: Before you submit, please delete all 
-the instructions in this document, 
-including this paragraph. 
-Thank you!}}
-
-
 
 
 \end{document}
