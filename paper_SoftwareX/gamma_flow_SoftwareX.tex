@@ -1,36 +1,16 @@
 %% 
 %% Copyright 2007, 2008, 2009 Elsevier Ltd
-%% 
-%% This file is part of the 'Elsarticle Bundle'.
-%% ---------------------------------------------
-%% 
-%% It may be distributed under the conditions of the LaTeX Project Public
-%% License, either version 1.2 of this license or (at your option) any
-%% later version.  The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.2 or later is part of all distributions of LaTeX
-%% version 1999/12/01 or later.
-%% 
-%% The list of all files belonging to the 'Elsarticle Bundle' is
-%% given in the file `manifest.txt'.
-%% 
 
-%% Template article for Elsevier's document class `elsarticle'
-%% with numbered style bibliographic references
-%% SP 2008/03/01
 
 \documentclass[preprint,12pt, a4paper]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
-%% For including figures, graphicx.sty has been loaded in
-%% elsarticle.cls. If you prefer to use the old commands
-%% please give \usepackage{epsfig}
 
-%% The amssymb package provides various useful mathematical symbols
-\usepackage{amssymb}
-\usepackage{color}
+\usepackage{amssymb} % math symbols
+\usepackage{color} % TODO delete
+\usepackage{comment}
 \usepackage{hyperref}
 \setlength{\parindent}{0pt}
 %% The amsthm package provides extended theorem environments
@@ -197,10 +177,11 @@ Originally developed for gamma spectroscopy, \textbf{gamma\_flow} is applicable 
 
 
 \section{Software description}
+\label{sec:software_description}
 
 \textbf{gamma\_flow} is based on a dimensionality reduction model that constitutes a novel, supervised approach to non-negative matrix factorization (NMF). More explicitly, the spectral data matrix is decomposed into the product of two low-rank matrices denoted as the scores (spectral data in latent space) and the loadings (transformation matrix or latent components). The loadings matrix is predefined and consists of the mean spectra of the training isotopes. Hence, by design, the scores axes correspond to the share of an isotope in a spectrum, resulting in an interpretable latent space. As a result, the classification of a test spectrum can be read directly from its (normalized) scores. In particular, shares of individual isotopes in a multi-label spectrum can be identified. This leads to an explainable quantitative prediction of the spectral constituents. 
 
-The scores can be transformed back into spectral space by applying the inverse model. This inverse transformation rids the test spectrum of noise and results in a smooth, easily recognizable denoised spectrum. 
+For spectral denoising, the scores are transformed back into spectral space by applying the inverse model. This inverse transformation rids the test spectrum of noise and results in a smooth, easily recognizable denoised spectrum. 
 
 If a test spectrum of an isotope is unknown to the model (i.e. this isotope was not included in model training), it can still be projected into latent space. However, when the latent space information (scores) are decompressed, the resulting denoised spectrum does not resemble the original spectrum any more. Some original features may not be captured while new peaks may have been fabricated. This can be quantified by calculating the cosine similarity between the original and the denoised spectrum, which can serve as an indicator of a test spectrum 
 to be an outlier.
@@ -210,8 +191,8 @@ to be an outlier.
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{software_architecture_gamma_flow.pdf}
-\label{fig:software_architecture}
 \caption{Software architecture of \textbf{gamma\_flow}: The jupyter notebooks \texttt{01\_preprocessing.ipynb}, \texttt{02\_model.ipynb} and \texttt{03\_outlier.ipynb} are executed consecutively, using functions from different Python files. }
+\label{fig:software_architecture}
 \end{figure}
 
 \subsection{Software functionalities}
@@ -244,6 +225,7 @@ This helps to assess whether the model can handle spectra from different detecto
 
 
 \subsubsection{Model training and testing}
+\label{sec:model_training_testing}
 The notebook \texttt{02\_model.ipynb} trains and tests a dimensionality reduction model that allows for denoising, classification and outlier detection of test spectra. All functions called in this notebook are found in \texttt{tools\_model.py}.
 
 The dimensionality reduction model presented in this paper comprises a matrix decomposition of spectral data. More precisely, the original spectra matrix $X$ is reconstructed by two low-rank matrices $S$ and $L$:  
@@ -252,11 +234,12 @@ with $S$: scores matrix (spectra in latent space) \\
 \hspace*{0.8cm} $L$: loadings matrix (transformation matrix or latent components). \\ 
 
 \begin{figure}
-\includegraphics[width=\textwidth]{figure_1.png}
+\includegraphics[width=\textwidth]{matrix_decomposition.png}
+\caption{Decomposition of spectral data into scores and loadings, illustrated for five different isotopes. The loadings matrix contains the latent components, corresponding to the mean spectrum of each isotope. The scores matrix provides the representation of each spectrum in the five-dimensional latent space. When normalized, the scores indicate the predicted contribution of each isotope to the measured spectrum.}
 \label{fig:matrix_decomposition}
 \end{figure}
 
-As illustrated in Figure \ref{fig:matrix_decomposition}, original spectral data can be compressed into $k_\mathrm{isotopes}$ dimensions. To ensure a conclusive assignment of the latent space axes to the isotopes (i.e. one axis stands for of one isotope), the loadings matrix is predefined as the mean spectra of the $k_\mathrm{isotopes}$ isotopes. 
+As illustrated in Figure \ref{fig:matrix_decomposition}, original spectral data can be compressed into $k_\mathrm{isotopes}$ dimensions. To ensure a conclusive assignment of the latent space axes to the isotopes (i.e. one axis stands for of one isotope), the loadings matrix is predefined as the mean spectra of the $k_\mathrm{isotopes}$ isotopes. It represents the latent components and serves as transformation matrix between spectral space and latent space.
 
 During model training, mean spectra for all isotopes are calculated. The scores are then derived by non-negative least squares fit of the original spectra to the loadings matrix. Thus, the components of the normalized scores vectors directly reveal the contributions of the individual isotopes. Denoised spectra, on the other hand, are computed by transforming the non-normalized scores back into spectral space (i.e. by multiplication of with the loadings matrix).
 
@@ -308,10 +291,39 @@ Apart from the jupyter notebooks and python files described above, the project i
 
 \section{Illustrative examples}
 
-\textit{Provide at least one illustrative example to demonstrate the major
-functions of your software/code.}
+The major functions of \texttt{gamma\_flow} include classification, denoising, decomposition, and outlier detection of spectra. In this section, these capabilities are demonstrated using an illustrative example. 
 
-\textit{\textbf{Optional}: you may include one explanatory  video or screencast that will appear next to your article, in the right hand side panel. Please upload any video as a single supplementary file with your article. Only one MP4 formatted, with 150MB maximum size, video is possible per article. Recommended video dimensions are 640 x 480 at a maximum of 30 frames / second. Prior to submission please test and validate your .mp4 file at  \url{http://elsevier-apps.sciverse.com/GadgetVideoPodcastPlayerWeb/verification}. This tool will display your video exactly in the same way as it will appear on ScienceDirect. }
+A model is trained based on spectra of the isotopes Americium-241 (\textsuperscript{241}Am), Cobalt-60 (\textsuperscript{60}Co), Caesium-137 (\textsuperscript{137}Cs), Europium-152 (\textsuperscript{152}Eu), and pure background. The spectra are acquired using detector \texttt{det\_tr}, and the isotope spectra are free of background radiation.
+
+The model is then inferenced on various test datasets to assess its performance in different scenarios (for more detail, see Section~\ref{sec:model_training_testing}). The following example focuses on test dataset 2, in which test spectra were recorded using a different detector. Each test spectrum contains either a single isotope combined with background or pure background only; no background subtraction was applied.
+
+
+The \textbf{classification} results for this test dataset can be seen in Figure \ref{fig:confusion_matrix}, where the predicted labels are plotted against the ground truth as a confusion matrix. Correct classifications are highlighted with green borders while misclassifications are framed in red. Despite the difference between training and test spectra (different detector and presence of background in test data), an overall accuracy of 94.8\% is achieved. Notably, all misclassifications involve confusion between an isotope and pure background — never between two isotopes. Such cases typically occur when the isotope signal is near the detection threshold and the model's prediction deviates from the manually assigned label. Please refer to the software documentation for further visualizations on model training and classification results, such as the loadings, the scores (visualized as scatter matrix), the mean predicted scores by isotope, misclassified example spectra and misclassification statistics. 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Confusion_matrix_.pdf}
+\caption{Confusion matrix of single-label classification, with an accuracy of 94.8\%. While the model was trained on spectra from detector \texttt{det\_tr}, spectra from a different detector were used as test data. Misclassifications only occur between an isotope and background, not between different isotopes.}
+\label{fig:confusion_matrix}
+\end{figure}
+
+As described in Section \ref{sec:software_description}, test spectra are denoised by transforming the scores back into spectral space (by multiplication with the loadings matrix). The resulting spectra are significantly smoother and easier to interpret, as can be seen in Figure %\ref{fig:denoised_spectrum}.
+TO DO
+
+\begin{comment}
+\begin{figure}
+\includegraphics[width=\textwidth]{denoised_spectrum.png}
+\caption{...}
+\label{fig:denoised_spectrum}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{feature_importance.png}
+\caption{...}
+\label{fig:feature_importance}
+\end{figure}
+\end{comment}
+
 
 \textcolor{blue}{
 Plots: 

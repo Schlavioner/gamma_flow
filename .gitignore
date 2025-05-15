@@ -9,6 +9,7 @@
 /venv/
 /.vscode/
 /.ipynb_checkpoints/
+/paper_SoftwareX/Plot-Parkplatz
 .gitlab/
 *.pyc
 /paper_SoftwareX/*.aux
