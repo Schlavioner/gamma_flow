@@ -242,7 +242,7 @@ with $S$: scores matrix (spectra in latent space) \\
 As illustrated in Figure \ref{fig:matrix_decomposition}, original spectral data can be compressed into $k_\mathrm{isotopes}$ dimensions. To ensure a conclusive assignment of the latent space axes to the isotopes (i.e. one axis stands for of one isotope), the loadings matrix is predefined as the mean spectra of the $k_\mathrm{isotopes}$ isotopes. It represents the latent components and serves as transformation matrix between spectral space and latent space.
 
 In mathematical terms, this model represents a 'supervised' approach to Non-negative Matrix Factorization (NMF) \cite{Shreeves2020, Bilton2019}. 
-While dimensionality reduction is conventionally an unsupervised task as it only considers data structure \cite{Olaya2022}, our approach integrates labels in model training. This leads to an interpretable latent space and obviates the need for an additional classification step. While other supervised NMF approaches incorporate classification loss in model training \cite{Leuschner2019, Lee2010, Bisot2016}, our model focuses on a comprehensible construction of the latent space. \\
+While dimensionality reduction is conventionally an unsupervised task as it only considers data structure \cite{Olaya2022}, our approach integrates labels in model training. This leads to an interpretable latent space and obviates the need for an additional classification step. In constrast to other supervised NMF approaches that incorporate classification loss in model training \cite{Leuschner2019, Lee2010, Bisot2016}, our model focuses on a comprehensible construction of the latent space. \\
 
 During model training, mean spectra for all isotopes are calculated. The scores are then derived by non-negative least squares fit of the original spectra to the loadings matrix. This makes possible the \textbf{spectral decomposition} and \textbf{classification} of the spectra, as the components of the normalized scores vectors directly reveal the contributions of the individual isotopes. \textbf{Denoised spectra}, on the other hand, are computed by transforming the non-normalized scores back into spectral space (i.e. by multiplication of with the loadings matrix). \\
 
@@ -287,7 +287,7 @@ Apart from the jupyter notebooks and python files described above, the project i
 \end{itemize}
 
 
-\section{Illustrative examples}
+\section{Illustrative example}
 
 The major functions of \texttt{gamma\_flow} include classification, denoising, decomposition, and outlier detection of spectra. In this section, these capabilities are demonstrated using an illustrative example. 
 
@@ -296,7 +296,7 @@ A model is trained based on spectra of the isotopes Americium-241 (\textsuperscr
 The model is then inferenced on various test datasets to assess its performance in different scenarios (for more detail, see Section~\ref{sec:model_training_testing}). The following example focuses on test dataset 2, in which test spectra were recorded using a different detector. Each test spectrum contains either a single isotope combined with background or pure background only; no background subtraction was applied.
 
 
-The \textbf{classification} results for this test dataset can be seen in Figure \ref{fig:confusion_matrix}, where the predicted labels are plotted against the ground truth as a confusion matrix. Correct classifications are highlighted with green borders while misclassifications are framed in red. Despite the difference between training and test spectra (different detector and presence of background in test data), an overall accuracy of 94.8\% is achieved. Notably, all misclassifications involve confusion between an isotope and pure background — never between two isotopes. Such cases typically occur when the isotope signal is near the detection threshold and the model's prediction deviates from the manually assigned label. Please refer to the software documentation for further visualizations on model training and classification results, such as the loadings, the scores (visualized as scatter matrix), the mean predicted scores by isotope, misclassified example spectra and misclassification statistics. 
+The \textbf{classification} results for this test dataset can be seen in Figure \ref{fig:confusion_matrix}, where the predicted labels are plotted against the ground truth as a confusion matrix. Correct classifications are highlighted with green borders while misclassifications are framed in red. Despite the difference between training and test spectra (different detector and presence of background in test data), an overall accuracy of 94.8\% is achieved. Notably, all misclassifications involve confusion between an isotope and pure background — never between two isotopes. Such cases typically occur when the isotope signal is near the detection threshold and the model's prediction deviates from the manually assigned label. Please refer to the software documentation in the code repository for further visualizations on model training and classification results, such as the loadings, the scores (visualized as scatter matrix), the mean predicted scores by isotope, misclassified example spectra and misclassification statistics. \\
 
 \begin{figure}
 \centering
@@ -305,16 +305,15 @@ The \textbf{classification} results for this test dataset can be seen in Figure 
 \label{fig:confusion_matrix}
 \end{figure}
 
-As described in Section \ref{sec:software_description}, test spectra are denoised by transforming the scores back into spectral space (by multiplication with the loadings matrix). The resulting spectra are significantly smoother and easier to interpret, as can be seen in Figure %\ref{fig:denoised_spectrum}.
-TO DO
+As described in Section \ref{sec:software_description}, test spectra are \textbf{denoised} by transforming the scores back into spectral space by multiplication with the loadings matrix. The resulting spectra are significantly smoother and easier to interpret. A denoised example spectrum of \textsuperscript{137}Cs and background is depicted in Figure \ref{fig:denoised_spectrum}. As can be seen in the annotations, the predictions are correct, with an additional information on the contribution of the components: The model predicts 16\% share of \textsuperscript{137}Cs and 83\% background. The reconstruction of the original spectrum by the denoised spectrum is quantified by their cosine similarity of 0.99 and the explained variance ration of 98.14\%, which both indicate a successfull denoising process without low deviation. 
 
-\begin{comment}
 \begin{figure}
-\includegraphics[width=\textwidth]{denoised_spectrum.png}
+\includegraphics[width=\textwidth]{Denoised_Cs137.png}
 \caption{...}
 \label{fig:denoised_spectrum}
 \end{figure}
 
+\begin{comment}
 \begin{figure}
 \includegraphics[width=\textwidth]{feature_importance.png}
 \caption{...}
