@@ -226,9 +226,9 @@ This helps to assess whether the model can handle spectra from different detecto
 
 \subsubsection{Model training and testing}
 \label{sec:model_training_testing}
-The notebook \texttt{02\_model.ipynb} trains and tests a dimensionality reduction model that allows for denoising, classification and outlier detection of test spectra. All functions called in this notebook are found in \texttt{tools\_model.py}.
+The notebook \texttt{02\_model.ipynb} trains and tests a dimensionality reduction model that allows for denoising, classification and outlier detection of test spectra. All functions called in this notebook are found in \texttt{tools\_model.py}. \\
 
-The dimensionality reduction model presented in this paper comprises a matrix decomposition of spectral data. More precisely, the original spectra matrix $X$ is reconstructed by two low-rank matrices $S$ and $L$:  
+\textbf{The model} presented in this paper comprises a matrix decomposition of spectral data for dimensionality reduction. More precisely, the original spectra matrix $X$ is reconstructed by two low-rank matrices $S$ and $L$:  
 $$ X \approx S  L^{T} $$  
 with $S$: scores matrix (spectra in latent space) \\  
 \hspace*{0.8cm} $L$: loadings matrix (transformation matrix or latent components). \\ 
@@ -241,14 +241,12 @@ with $S$: scores matrix (spectra in latent space) \\
 
 As illustrated in Figure \ref{fig:matrix_decomposition}, original spectral data can be compressed into $k_\mathrm{isotopes}$ dimensions. To ensure a conclusive assignment of the latent space axes to the isotopes (i.e. one axis stands for of one isotope), the loadings matrix is predefined as the mean spectra of the $k_\mathrm{isotopes}$ isotopes. It represents the latent components and serves as transformation matrix between spectral space and latent space.
 
-During model training, mean spectra for all isotopes are calculated. The scores are then derived by non-negative least squares fit of the original spectra to the loadings matrix. Thus, the components of the normalized scores vectors directly reveal the contributions of the individual isotopes. Denoised spectra, on the other hand, are computed by transforming the non-normalized scores back into spectral space (i.e. by multiplication of with the loadings matrix).
-
 In mathematical terms, this model represents a 'supervised' approach to Non-negative Matrix Factorization (NMF) \cite{Shreeves2020, Bilton2019}. 
-While dimensionality reduction is conventionally an unsupervised task as it 
-only considers data structure \cite{Olaya2022}, our approach integrates labels in model training. This leads to an interpretable latent space and obviates the need for an additional classification step. While other supervised NMF approaches incorporate classification loss in model training \cite{Leuschner2019, Lee2010, Bisot2016}, our model focuses on a comprehensible construction of the latent space. 
+While dimensionality reduction is conventionally an unsupervised task as it only considers data structure \cite{Olaya2022}, our approach integrates labels in model training. This leads to an interpretable latent space and obviates the need for an additional classification step. While other supervised NMF approaches incorporate classification loss in model training \cite{Leuschner2019, Lee2010, Bisot2016}, our model focuses on a comprehensible construction of the latent space. \\
 
+During model training, mean spectra for all isotopes are calculated. The scores are then derived by non-negative least squares fit of the original spectra to the loadings matrix. This makes possible the \textbf{spectral decomposition} and \textbf{classification} of the spectra, as the components of the normalized scores vectors directly reveal the contributions of the individual isotopes. \textbf{Denoised spectra}, on the other hand, are computed by transforming the non-normalized scores back into spectral space (i.e. by multiplication of with the loadings matrix). \\
 
-The model is trained using spectral data from the specified detectors \texttt{dets\_tr} and isotopes \texttt{isotopes\_tr}. Subsequently, it is inferenced (i.e. scores are calculated) on three different test datasets:
+To assess \textbf{model performance}, the model is trained using spectral data from the specified detectors \texttt{dets\_tr} and isotopes \texttt{isotopes\_tr} and inferenced (i.e. scores are calculated) on three different test datasets:
 \begin{enumerate}
 \item validation data/holdout data from same detector as used in training (each spectrum including 
 only one isotope or pure background)

@@ -743,6 +743,19 @@ def plot_denoised_spectrum_example(data: List[dict]):
     :param data: test dataset (list of dictionaries with each dict containing one spectrum and metadata)
     :type data: List[dict]
     """
+    cherry_picking = False
+    if cherry_picking:
+        data = [x for x in data if "Cs137" in x["labels"]]
+        for d in data:
+            exp_var = explained_variance_score(d["spectrum"], d["denoised"])
+            d["exp_var"] = exp_var
+        data = [x for x in data if x["exp_var"] > 0.98]
+        data = [
+            x
+            for x in data
+            if all(label in x["labels_pred_dict"] for label in x["labels"])
+        ]
+
     # pick a random spectrum and extract original, denoised spectrum, true and predicted labels
     n_spectra = len(data)
     ii = np.random.choice(np.arange(n_spectra))
@@ -750,34 +763,44 @@ def plot_denoised_spectrum_example(data: List[dict]):
     denoised_spectrum = data[ii]["denoised"]
 
     labels = data[ii]["labels"]
-    labels = labels[0] if len(labels) == 1 else labels  # convert ['Am241'] to 'Am241'
+    if len(labels) == 1:
+        title_text = f"Denoised spectrum (true label: {labels[0]})"
+        labels = labels[0]
+    else:
+        title_text = f"Denoised spectrum (true labels: {', '.join(l for l in labels)})"
+    # labels = labels[0] if len(labels) == 1 else labels  # convert ['Am241'] to 'Am241'
 
     labels_pred_dict = data[ii]["labels_pred_dict"]
     labels_pred_dict = {
         iso: round(sco, 2) for iso, sco in labels_pred_dict.items()
     }  # round scores
-
+    annot_text = "Predicted isotopes: " + " ".join(
+        f"{iso}: {val}," for iso, val in labels_pred_dict.items()
+    )
+    annot_text = annot_text[:-1]
     cos_sim = cosine_similarity(original_spectrum, denoised_spectrum)
     exp_var = explained_variance_score(original_spectrum, denoised_spectrum)
 
     plt.figure(figsize=(12, 3))
-    plt.title(f"Denoised spectrum ({labels})")
+    plt.title(title_text)
     plt.plot(original_spectrum, c="darkorange", lw=2.0, label="original spectrum")
     plt.plot(denoised_spectrum, c="black", lw=1.5, label="denoised spectrum")
     plt.annotate(
-        f"predicted isotopes: {labels_pred_dict}",
-        xy=(0.02, 0.95),
+        annot_text,
+        xy=(0.02, 0.94),
         xycoords="axes fraction",
     )
     plt.annotate(
-        f"cosine similarity: {cos_sim: .2}", xy=(0.02, 0.89), xycoords="axes fraction"
+        f"cosine similarity: {cos_sim: .2}", xy=(0.02, 0.88), xycoords="axes fraction"
     )
     plt.annotate(
         f"explained variance ratio: {exp_var: .2%}",
-        xy=(0.02, 0.83),
+        xy=(0.02, 0.82),
         xycoords="axes fraction",
     )
     plt.xlim(0, GlobalVariables.n_channels)
+    y_max = np.max([np.max(original_spectrum), np.max(denoised_spectrum)])
+    plt.ylim(top=1.3 * y_max)
     plt.xlabel("energy channels", fontsize=16)
     plt.ylabel("intensity", fontsize=16)
     plt.legend(fontsize=14)
