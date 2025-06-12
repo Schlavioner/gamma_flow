@@ -19,5 +19,7 @@
 /paper_SoftwareX/*.out 
 /paper_SoftwareX/*.spl
 /paper_SoftwareX/*.gz
+/paper_SoftwareX/
+/paper_JOSS/
 
  
