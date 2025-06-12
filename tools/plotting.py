@@ -4,8 +4,8 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 
 from sklearn.metrics import confusion_matrix
-from tools.util import *
-from tools.tools_model import *
+from .util import *
+from .tools_model import *
 
 
 def saveplot(save_plot: bool, name: str, title: str):
