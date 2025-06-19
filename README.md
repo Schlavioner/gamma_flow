@@ -17,8 +17,8 @@ We have successfully tested GAMMA_FLOW on the following operating systems:
 - MS Windows 11 Pro
 - macOS Catalina 10.15.7
 
-Windows user can try to follow the windows part of installation, if winget is available on their machine.
-As alternative, you can try to use the linux-subsystem of your Windows installation 
+Windows users can try to follow the windows part of installation if winget is available on their machine.
+As alternative, you can try to use the linux subsystem of your Windows installation 
 (https://learn.microsoft.com/de-de/windows/wsl/install). Then you can use the linux script.
 
 ### *WINDOWS*
@@ -142,7 +142,7 @@ Anything else: ki-anwendungslabor -AT- uba.de
 Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily Alice Kröger, Martin Baron
 
 
-**Folder structure**
+## Folder structure
 . <br>
 ├── 01_preprocessing.ipynb &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # preprocessing of spectra <br>
 ├── 02_model.ipynb &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # model training and testing <br>
@@ -156,17 +156,11 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 ├── publiccode.yml &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # metadata description standard for public software <br>
 ├── README                              <br>
 ├── requirements.txt &emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; # all required third-party packages <br>
-├── data                               <br>
-│   ├── 1_numpy_raw &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all measured & simulated data as .npy files <br>
-│   ├── 2_Numpy_ready &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # contains all preprocessed measured & simulated data as .npy files <br>
-│   └── 00_list_of_isotopes                        <br>
 ├── documentation <br>
 │   ├── 01_preprocessing.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of preprocessing (for example dataset) <br>
 │   ├── 02_model.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of model training (for example dataset) <br>
-│   └── 03_outlier.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of outlier analysis (for example dataset) <br>
-├── paper_JOSS &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for JOSS paper files<br>
-│   ├── paper.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # JOSS paper <br>
-│   └── ... <br>
+│   ├── 03_outlier.pdf &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # documentation of outlier analysis (for example dataset) <br>
+│   └── HTML-documentation &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # code documentation as HTML
 ├── plots &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;# folder for saved plots (contains 1 folder per nuclide) <br>
 │   ├── Am241 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; # folder for saved plots of Am241 <br>
 │   └── ... <br> 
@@ -182,7 +176,7 @@ Viola Rädle, Tilman Hartwig, Benjamin Oesen, Julius Vogt, Eike Gericke, Emily A
 
 
 
-**How to Use the Project**
+## How to use the Project
 
 This project consists of several jupyter notebooks that rely on functions in corresponding python files. In addition, the python files `globals` and `util` provide global variables and basic functions that are used by all notebooks. 
 The data should be analyzed in a certain order, as described below: 
@@ -223,7 +217,7 @@ The data should be analyzed in a certain order, as described below:
 - Results of this notebook can then be manually implemented in measurement pipeline
 
 
-**List of model parameters**
+## List of model parameters
 - isotopes to be analyzed (defined manually in `data/00_list_of_isotopes.txt`)
 - `dets_measures` and `det_simulated`: names of simulated / measured detectors (`01_preprocessing.ipynb`)
 - `min_counts` and `max_counts`: minimum and maximum number of counts allowed per spectra (`01_preprocessing.ipynb`)
