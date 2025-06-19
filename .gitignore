@@ -11,5 +11,6 @@
 /.ipynb_checkpoints/
 .gitlab/
 *.pyc 
-
+/paper_SoftwareX/
+/paper_JOSS/   
  
