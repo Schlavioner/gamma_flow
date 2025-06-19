@@ -9,17 +9,9 @@
 /venv/
 /.vscode/
 /.ipynb_checkpoints/
-/paper_SoftwareX/Plot-Parkplatz
 .gitlab/
 *.pyc
-/paper_SoftwareX/*.aux
-/paper_SoftwareX/*.bbl
-/paper_SoftwareX/*.blg
-/paper_SoftwareX/*.log
-/paper_SoftwareX/*.out 
-/paper_SoftwareX/*.spl
-/paper_SoftwareX/*.gz
-# /paper_SoftwareX/
+/paper_SoftwareX/
 /paper_JOSS/   
 
  
